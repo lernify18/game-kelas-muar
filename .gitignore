@@ -1,6 +1,6 @@
-worktrees/
 node_modules/
 .tmp/
+out/
 test-results/
 playwright-report/
 .DS_Store

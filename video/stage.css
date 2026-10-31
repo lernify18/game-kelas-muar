@@ -1,0 +1,75 @@
+:root {
+  --gold: #ffc53d;
+  --gold-deep: #ff9f1c;
+  --red: #e5252a;
+  --ink: #0b0b0f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; background: #000; overflow: hidden; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "Inter Tight", system-ui, sans-serif; }
+#stage > *, #layers > * { position: absolute; }
+
+#grid { inset: 0; width: 1080px; height: 1920px; opacity: .5; transform-origin: 50% 70%; }
+#gridGlow { inset: 0; background:
+  radial-gradient(70% 45% at 50% 42%, rgba(255, 197, 61, .10), transparent 70%),
+  radial-gradient(120% 80% at 50% 50%, transparent 45%, rgba(0, 0, 0, .85) 100%); }
+#layers { inset: 0; }
+#leak { inset: 0; width: 1080px; height: 1920px; mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+#grain { inset: -40px; opacity: .07; mix-blend-mode: overlay; pointer-events: none; }
+
+/* ---------- BTS (latar hook) ---------- */
+.bts { inset: 0; overflow: hidden; }
+.bts img { width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 40%; filter: saturate(.85) contrast(1.05); }
+.bts .shade { position: absolute; inset: 0; background:
+  linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 30%, rgba(0,0,0,.15) 46%, rgba(0,0,0,.55) 62%, rgba(0,0,0,.85) 100%); }
+
+/* ---------- peranti ---------- */
+.dev { left: 0; top: 0; transform-origin: 50% 50%; will-change: transform; }
+.dev .body { position: relative; border-radius: var(--r); padding: var(--bz); background: linear-gradient(145deg, #4a4a55 0%, #1d1d24 22%, #0d0d12 60%, #2e2e38 100%);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.18), inset 0 2px 0 rgba(255,255,255,.25), 0 50px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.6); }
+.dev .scr { position: relative; width: 100%; height: 100%; border-radius: calc(var(--r) - var(--bz)); overflow: hidden; background: #111; }
+.dev .scr img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.dev.phone .scr img { position: absolute; top: 48px; height: calc(100% - 48px); }
+.dev .sbar { display: none; }
+.dev.phone .sbar { display: flex; position: absolute; left: 0; right: 0; top: 0; height: 48px; padding: 0 42px; align-items: center; justify-content: space-between; background: #fff; color: #111; font-weight: 800; font-size: 22px; z-index: 2; }
+.dev.phone .sbar i { display: inline-block; width: 34px; height: 16px; border: 2.5px solid #111; border-radius: 5px; position: relative; }
+.dev.phone .sbar i::after { content: ""; position: absolute; inset: 2px 7px 2px 2px; background: #111; border-radius: 2px; }
+.dev .glare { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0) 70%, rgba(255,255,255,.06) 100%); pointer-events: none; }
+.dev .island { position: absolute; left: 50%; top: calc(var(--bz) + 8px); width: 128px; height: 34px; margin-left: -64px; border-radius: 30px; background: #000; z-index: 3; }
+.dev.tablet .island { width: 14px; height: 14px; margin-left: -7px; top: calc(var(--bz) / 2 - 7px); background: #222; box-shadow: inset 0 0 0 3px #111; }
+.dev .side { position: absolute; right: -6px; top: 22%; width: 6px; height: 120px; border-radius: 0 4px 4px 0; background: linear-gradient(90deg, #2a2a33, #55555f); }
+.dev .shadow { position: absolute; left: 8%; right: 8%; bottom: -60px; height: 80px; border-radius: 50%; background: rgba(0,0,0,.7); filter: blur(28px); z-index: -1; }
+.tap { position: absolute; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; border: 6px solid rgba(255,255,255,.95); background: rgba(255,255,255,.28); box-shadow: 0 0 30px rgba(255,255,255,.6); z-index: 4; opacity: 0; }
+
+/* ---------- kapsyen gaya Iman ---------- */
+.caps { left: 70px; right: 70px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.cap-group { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: .26em; row-gap: .02em; line-height: 1.04; }
+.cap-w { display: inline-block; color: #fff; font-weight: 900; letter-spacing: -.02em; text-transform: uppercase;
+  text-shadow: 0 6px 24px rgba(0,0,0,.65), 0 2px 0 rgba(0,0,0,.35); transform-origin: 50% 80%; }
+.cap-w.gold { color: var(--gold); text-shadow: 0 0 34px rgba(255,170,30,.45), 0 6px 24px rgba(0,0,0,.6); }
+.cap-w.serif { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 1.22em; line-height: .9; }
+.cap-w.big { font-size: 1.7em; }
+
+/* ---------- kotak POV ---------- */
+.pov { left: 60px; right: 60px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pov-line { background: #fff; color: #111; font-weight: 800; font-size: 60px; line-height: 1.12; padding: 16px 28px 18px; border-radius: 18px; text-align: center; max-width: 960px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+.pov-line .hl { background: var(--red); color: #fff; padding: 0 12px 2px; border-radius: 10px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.pov-line.sol { background: var(--red); color: #fff; }
+.pov-line.sol .hl { background: #fff; color: var(--red); }
+
+/* ---------- hook ---------- */
+.hook { inset: 0; }
+.hook .title, .hook .solwrap { position: absolute; left: 50px; right: 50px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hook .kicker { font-weight: 800; font-size: 40px; letter-spacing: .14em; text-transform: uppercase; color: #111; background: var(--gold); padding: 10px 26px 12px; border-radius: 999px; margin-bottom: 26px; box-shadow: 0 10px 30px rgba(255,170,30,.35); }
+.hook .h1 { font-weight: 900; font-size: 128px; line-height: .95; letter-spacing: -.035em; color: #fff; text-transform: uppercase; text-shadow: 0 10px 40px rgba(0,0,0,.7); }
+.hook .h1 em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--gold); font-size: 1.12em; }
+.hook .sol { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 22px 40px 26px; border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); border: 2px solid rgba(255,255,255,.35); backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4); }
+.hook .sol b { font-weight: 900; font-size: 60px; line-height: 1.04; color: #fff; text-transform: uppercase; letter-spacing: -.02em; text-align: center; white-space: nowrap; }
+.hook .sol b i { font-style: normal; color: var(--gold); }
+.hook .badge { flex: none; font-weight: 900; font-size: 30px; letter-spacing: .14em; color: #111; background: var(--gold); padding: 8px 18px; border-radius: 12px; }
+
+/* ---------- SVG ---------- */
+.art { left: 0; top: 0; width: 1080px; height: 1920px; }
