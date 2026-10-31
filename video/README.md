@@ -5,7 +5,7 @@ Dua versi 9:16 untuk Meta Ads, 15–25 s:
 | Versi | Audio | Teks |
 |---|---|---|
 | `vo` | VO ElevenLabs dari `RAW/` + muzik `footage/` pada 10% + SFX game | Hook (tajuk + SOLUSI PROVEN) atas BTS, kemudian kapsyen gaya Iman perkataan demi perkataan |
-| `pov` | Muzik `footage/` + SFX game (BTS dibisukan) | Kotak POV putih/merah |
+| `pov` | Muzik `footage/` + SFX game (BTS dibisukan) | Hook yang sama, kemudian kapsyen gaya Iman dengan masa tetap (`{ text, at }`) |
 
 B-roll = skrin game sebenar (dari worktree `feat-misi-3m-v1`) dalam mockup telefon/tablet. Bila tiada skrin yang padan,
 grafik SVG 3D (`art.js`): buku, bintang, bar komen. Latar = grid hitam dari `footage/`.

@@ -64,6 +64,24 @@ for (const v of VERSIONS) {
       expect(txt).toMatch(/PROVEN/i);
     });
 
+    test("kapsyen gaya Iman (perkataan demi perkataan), tiada kotak POV putih/merah", async () => {
+      const { page } = stage;
+      const r = await page.evaluate(async () => {
+        const groups = window.SCENES.filter((s) => s.type === "caps").flatMap((s) => s.groups);
+        let staggered = 0;
+        for (const g of groups) {
+          await window.seek(g.a + 0.02);
+          const vis = [...document.querySelectorAll(".cap-group")].find((e) => e.style.display !== "none" && e.closest("[data-scene]").style.display !== "none");
+          const ops = vis ? [...vis.querySelectorAll(".cap-w")].map((w) => +w.style.opacity) : [];
+          if (ops.length < 2 || ops.at(-1) < 0.5) staggered++;
+        }
+        return { groups: groups.length, staggered, povBoxes: document.querySelectorAll(".pov, .pov-line").length };
+      });
+      expect(r.povBoxes).toBe(0);
+      expect(r.groups).toBeGreaterThanOrEqual(8);
+      expect(r.staggered).toBe(r.groups);
+    });
+
     test("B-roll = skrin game sebenar dalam telefon DAN tablet, selang-seli dengan teks", async () => {
       const scenes = await stage.page.evaluate(() => window.SCENES);
       const devs = scenes.filter((s) => s.type === "device");

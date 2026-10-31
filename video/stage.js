@@ -60,16 +60,18 @@
     caps(s) {
       s.el = $(`<div class="caps" style="font-size:${s.size || 96}px"></div>`);
       let ptr = Math.max(0, WORDS.findIndex((w) => w.start >= s.a - 0.25));
+      // Kumpulan = "teks" (masa dari VO) atau { text, at, step } (masa tetap, untuk versi tanpa VO).
       s.G = s.groups.map((spec) => {
+        const timed = typeof spec === "object";
         const g = $(`<div class="cap-group"></div>`);
-        const words = spec.split(/\s+/).filter(Boolean).map((tok) => {
+        const words = (timed ? spec.text : spec).split(/\s+/).filter(Boolean).map((tok, i) => {
           let [spoken, shown] = tok.includes("=") ? tok.split("=") : [tok, tok];
           const cls = [];
           const strip = (x, m, c) => { if (x.startsWith(m) && x.replace(/[.,?!]+$/, "").endsWith(m)) { cls.push(...c); return x.slice(m.length).replace(m, ""); } return x; };
           shown = strip(shown, "^", ["gold", "big"]); shown = strip(shown, "*", ["gold"]); shown = strip(shown, "_", ["gold", "serif"]);
           spoken = spoken.replace(/[\^*_]/g, "");
-          let at = null;
-          for (let k = ptr; k < Math.min(WORDS.length, ptr + 5); k++) if (norm(WORDS[k].w) === norm(spoken)) { at = WORDS[k].start; ptr = k + 1; break; }
+          let at = timed ? spec.at + i * (spec.step || 0.13) : null;
+          if (!timed) for (let k = ptr; k < Math.min(WORDS.length, ptr + 5); k++) if (norm(WORDS[k].w) === norm(spoken)) { at = WORDS[k].start; ptr = k + 1; break; }
           if (at == null) WARN.push(`kapsyen tak padan VO: "${spoken}"`);
           const el = $(`<span class="cap-w ${cls.join(" ")}">${shown}</span>`);
           g.appendChild(el);
@@ -80,15 +82,6 @@
         return { g, words, a: words[0].at };
       });
       s.G.forEach((g, i) => { g.b = i + 1 < s.G.length ? s.G[i + 1].a : s.b; });
-    },
-    pov(s) {
-      s.el = $(`<div class="pov"></div>`);
-      s.L = s.lines.map((l) => {
-        const html = l.text.replace(/\[([^\]]+)\]/g, '<span class="hl">$1</span>');
-        const el = $(`<div class="pov-line${l.sol ? " sol" : ""}">${html}</div>`);
-        s.el.appendChild(el);
-        return { el, at: s.a + (l.at || 0) };
-      });
     },
     hook(s) {
       s.el = $(`<div class="hook"><div class="title" style="top:${s.y}px">${s.kicker ? `<div class="kicker">${s.kicker}</div>` : ""}<div class="h1">${s.h1.map((l) => `<div class="hl1">${l}</div>`).join("")}</div></div>
@@ -145,14 +138,6 @@
           w.el.style.opacity = clamp(q * 2.2);
           w.el.style.transform = `translateY(${(1 - eo(q)) * 26}px) scale(${0.72 + 0.28 * eb(q)})`;
         }
-      }
-    },
-    pov(s, t) {
-      s.el.style.top = `${s.y}px`;
-      for (const l of s.L) {
-        const q = lin(t, l.at, l.at + 0.22);
-        l.el.style.opacity = q > 0 ? 1 : 0;
-        l.el.style.transform = `scale(${0.8 + 0.2 * eb(q)})`;
       }
     },
     hook(s, t) {
@@ -228,7 +213,7 @@
     V = window.VERSION({ T, endOf, WORDS });
     document.body.insertAdjacentHTML("afterbegin", ART.SPRITE);
     gridImg.src = "../.tmp/clips/grid.png";
-    scenes = V.scenes.map((s, i) => { build[s.type](s); s.el.dataset.scene = `${i}:${s.type}${s.name ? ":" + s.name : ""}`; s.el.style.zIndex = s.z || ({ bts: 1, device: 3, art: 4, caps: 6, pov: 6, hook: 7 }[s.type]); layers.appendChild(s.el); return s; });
+    scenes = V.scenes.map((s, i) => { build[s.type](s); s.el.dataset.scene = `${i}:${s.type}${s.name ? ":" + s.name : ""}`; s.el.style.zIndex = s.z || ({ bts: 1, device: 3, art: 4, caps: 6, hook: 7 }[s.type]); layers.appendChild(s.el); return s; });
     moveGrain = grain();
     window.DUR = V.dur;
     window.SFX = V.sfx || [];
