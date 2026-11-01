@@ -5,3 +5,5 @@ test-results/
 playwright-report/
 .DS_Store
 /dist/
+# 629 MB: melebihi had 100 MB GitHub (perlu Git LFS atau versi mampat)
+/RAW/IMG_4944.mov
