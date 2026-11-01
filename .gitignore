@@ -9,3 +9,7 @@ playwright-report/
 /RAW/IMG_4944.mov
 out/
 .wrangler/
+# Rahsia dan arahan peribadi tidak masuk repo public
+.env*
+.dev.vars*
+CLAUDE.md
