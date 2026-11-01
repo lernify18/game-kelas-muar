@@ -39,3 +39,20 @@ pnpm test        # unit: integriti bank + enjin
 pnpm test:smoke  # Playwright smoke (port 4417)
 pnpm test:e2e    # Playwright e2e penuh
 ```
+
+## Terbit di Cloudflare
+
+- Game: **https://misi3m-game.lernify18.workers.dev** (Worker `misi3m-game`, Static Assets, folder `dist/`).
+- Sales page: **https://misi3m-sales.lernify18.workers.dev** (Worker berasingan, lihat `sales-page/README.md`).
+
+```bash
+pnpm run deploy
+```
+
+`pnpm run deploy` = `pnpm build` + `wrangler deploy`. Smoke yang sama boleh dijalankan terhadap laman hidup:
+
+```bash
+PW_BASE_URL=https://misi3m-game.lernify18.workers.dev npx playwright test tests/e2e/smoke.spec.mjs --project=chromium
+```
+
+Game ini tiada login atau kod akses: sesiapa yang ada pautan boleh main semua 6 dunia dan semua ciri.

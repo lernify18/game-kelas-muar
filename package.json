@@ -13,9 +13,11 @@
     "prep": "node tools/video/prep.mjs",
     "capture": "node tools/video/capture-game.mjs",
     "render": "node tools/video/render.mjs",
-    "test:video": "playwright test --project=video"
+    "test:video": "playwright test --project=video",
+    "deploy": "node tools/build-single.mjs && wrangler deploy"
   },
   "devDependencies": {
-    "@playwright/test": "1.62.1"
+    "@playwright/test": "1.62.1",
+    "wrangler": "4.156.0"
   }
 }

@@ -6,9 +6,11 @@
     "build": "node tools/build.mjs",
     "check": "node tools/build.mjs --check && node --check src/app.js",
     "test:smoke": "playwright test tests/smoke.spec.ts",
-    "test:e2e": "playwright test tests/sales-page.spec.ts"
+    "test:e2e": "playwright test tests/sales-page.spec.ts",
+    "deploy": "node tools/build.mjs && wrangler deploy"
   },
   "devDependencies": {
-    "@playwright/test": "1.64.1"
+    "@playwright/test": "1.64.1",
+    "wrangler": "4.156.0"
   }
 }

@@ -2,3 +2,5 @@ node_modules/
 .tmp/
 test-results/
 playwright-report/
+dist/
+.wrangler/

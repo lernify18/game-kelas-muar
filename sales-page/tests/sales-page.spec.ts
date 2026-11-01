@@ -36,6 +36,10 @@ async function toDemo(page: Page) {
 }
 
 async function drag(page: Page, from: Locator, to: Locator) {
+  // Press at a person's pace, after the reflow has been painted. WebKit (iPhone profile) hit-tests the press
+  // against the last committed frame: pressing ~40 ms after "ba" left the tray landed on "mi", not "ju".
+  await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  await page.waitForTimeout(100);
   const a = (await from.boundingBox())!;
   const b = (await to.boundingBox())!;
   await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2);

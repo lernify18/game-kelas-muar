@@ -28,6 +28,24 @@ npx playwright test tests/smoke.spec.ts
 
 E2E bersifat hermetik (server sendiri pada port rawak, Google Fonts dijawab kosong). Smoke memandu halaman sebenar di Herd.
 
+## Terbit di Cloudflare
+
+Hidup: **https://misi3m-sales.lernify18.workers.dev** (Worker `misi3m-sales`, Static Assets sahaja, akaun `lernify18`).
+
+```bash
+pnpm run deploy
+```
+
+`pnpm run deploy` = `node tools/build.mjs && wrangler deploy`. Build menulis `dist/index.html` (salinan
+`misi-pemulihan-3m-sales-page.html`, gitignored) dan Worker menghidang folder itu. HTML dihantar dengan
+`cache-control: public, max-age=0, must-revalidate`, jadi deploy baru terus kelihatan. Sahkan selepas deploy:
+
+```bash
+SMOKE_URL=https://misi3m-sales.lernify18.workers.dev/ npx playwright test tests/smoke.spec.ts --project=chromium --project=webkit-iphone
+```
+
+Dua butang CTA masih `href="#"`: halaman hidup belum boleh menerima bayaran sehingga pautan sebenar dipasang.
+
 ## Pasang di WordPress / Elementor
 
 1. Cipta halaman baharu → **Edit with Elementor**.

@@ -1,7 +1,8 @@
 // Builds the two deliverables from src/ and refuses to write them if an invariant breaks.
 //   node tools/build.mjs          → misi-pemulihan-3m-sales-page.html + misi3m-elementor-embed.html
+//                                   + dist/index.html (the Cloudflare assets folder, gitignored)
 //   node tools/build.mjs --check  → exit 1 if the committed files differ from a fresh build
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { body, PLANS, FEATURES } from '../src/sections.mjs';
@@ -100,5 +101,7 @@ if (process.argv.includes('--check')) {
     writeFileSync(dir + f, s);
     console.log(`${f}: ${(Buffer.byteLength(s) / 1024).toFixed(1)} KB raw, ${(gzipSync(s).length / 1024).toFixed(1)} KB gzip`);
   }
+  mkdirSync(dir + 'dist', { recursive: true });
+  writeFileSync(dir + 'dist/index.html', standalone);
   console.log(`ids ${ids.length} unique · refs ${refs.size} resolved · anchors ${ctas.length}`);
 }

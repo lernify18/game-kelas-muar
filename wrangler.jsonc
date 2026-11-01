@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "misi3m-game",
+  "account_id": "6a599862caf55da7c2e2adc71cf3f5b8",
+  "compatibility_date": "2026-10-28",
+  // Assets sahaja, tiada skrip Worker. dist/ datang dari `pnpm build` (satu fail HTML, bunyi tertanam).
+  "assets": { "directory": "./dist" }
+}

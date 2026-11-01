@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "misi3m-sales",
+  "account_id": "6a599862caf55da7c2e2adc71cf3f5b8",
+  "compatibility_date": "2026-10-28",
+  // Assets sahaja. dist/index.html ialah salinan misi-pemulihan-3m-sales-page.html yang ditulis oleh tools/build.mjs.
+  "assets": { "directory": "./dist" }
+}
