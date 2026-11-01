@@ -1,0 +1,17 @@
+{
+  "name": "misi-pemulihan-3m",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Game pendidikan 3M untuk kanak-kanak 5–9 tahun (BM + English), satu fail HTML.",
+  "scripts": {
+    "typecheck": "node tools/check-syntax.mjs",
+    "lint": "node tools/check-syntax.mjs",
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "build": "node tools/build-single.mjs",
+    "test:smoke": "playwright test tests/e2e/smoke.spec.mjs",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
