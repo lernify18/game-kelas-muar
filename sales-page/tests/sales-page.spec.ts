@@ -7,7 +7,7 @@ import { serve } from '../tools/serve.mjs';
 
 const dir = fileURLToPath(new URL('..', import.meta.url));
 const PAGE = '/misi-pemulihan-3m-sales-page.html';
-const FLOW = ['top-bar', 'hero', 'masalah', 'beza', 'demo', 'dapat', 'pakej', 'footer'];
+const FLOW = ['top-bar', 'hero', 'masalah', 'beza', 'demo', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
 
 const hostPage = () => `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>*{box-sizing:content-box}body{font-family:Georgia,serif;margin:0}h1,h2,h3{color:rgb(200,0,0);font-size:60px;text-transform:uppercase;margin:2em 0}
@@ -63,11 +63,12 @@ test('flow, guardrails and honest pricing', async ({ page }) => {
   await expect(page.locator('#misi3m-sales-root nav')).toHaveCount(0);
 
   const anchors = page.locator('#misi3m-sales-root a');
-  await expect(anchors).toHaveCount(2);
-  await expect(page.locator('[data-sec="pakej"] a.m3-cta')).toHaveCount(2);
+  await expect(anchors).toHaveCount(6);
+  await expect(page.locator('[data-sec="pakej"] a.m3-cta')).toHaveCount(3);
   await expect(page.locator('[data-sec="pakej"] a.m3-cta').nth(0)).toHaveText('SAYA NAK PAKEJ BASIC — RM49');
   await expect(page.locator('[data-sec="pakej"] a.m3-cta').nth(1)).toHaveText('SAYA NAK PAKEJ PRO — RM89');
-  expect(await anchors.evaluateAll((a) => a.map((x) => x.getAttribute('href')))).toEqual(['#', '#']);
+  await expect(page.locator('[data-sec="pakej"] a.m3-cta').nth(2)).toHaveText('SAYA NAK PAKEJ USAHAWAN — RM299');
+  expect(await anchors.evaluateAll((a) => a.map((x) => x.getAttribute('href')))).toEqual(['#', '#', '#', '#m3-pakej', '#m3-pakej', '#m3-pakej']);
   expect(await page.$$eval('#misi3m-sales-root button', (b) => b.every((x) => x.closest('[data-sec="demo"]')))).toBe(true);
 
   const text = (await page.locator('#misi3m-sales-root').textContent()) ?? '';

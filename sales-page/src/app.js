@@ -10,6 +10,7 @@
   var $$ = function (s, el) { return Array.prototype.slice.call((el || root).querySelectorAll(s)); };
 
   $$('[data-m3-year]').forEach(function (n) { n.textContent = String(new Date().getFullYear()); });
+  if (reduce) $$('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
 
   var demoEl = $('#m3-demo');
   var demo = demoEl ? initDemo() : null;

@@ -1,16 +1,31 @@
 # Misi Pemulihan 3M — sales page
 
-Sales page satu halaman (BM) untuk pakej BASIC RM49 dan PRO RM89. Semua mockup, ilustrasi dan demo dilukis dengan
+Sales page satu halaman (BM) untuk pakej BASIC RM49, PRO RM89 dan USAHAWAN RM299. Semua mockup, ilustrasi dan demo dilukis dengan
 SVG, CSS dan JavaScript ringan, tanpa gambar luar dan tanpa library animasi.
 
 | Fail | Guna |
 |---|---|
 | `misi-pemulihan-3m-sales-page.html` | Halaman penuh, terus boleh dibuka atau dimuat naik |
 | `misi3m-elementor-embed.html` | Kandungan yang sama tanpa `<html>/<head>/<body>`, untuk widget HTML Elementor |
-| `src/` | Sumber: `art.mjs` (sprite SVG, ikon, ilustrasi), `devices.mjs`, `screens.mjs`, `sections.mjs` (copy), `styles.css`, `app.js` |
+| `src/` | Sumber: `art.mjs` (sprite SVG, ikon, ilustrasi), `devices.mjs`, `screens.mjs`, `sections.mjs` (copy hingga pricing), `bawah.mjs` (seksyen bawah pricing), `styles.css`, `app.js` |
+| `assets/img/` | Foto trainer, 8 gambar kelas dan video 12 saat (seksyen Kata Pembangun dan Bukti); build menyalinnya ke `dist/assets/img/` |
+| `assets/fakta/` | Satu JSON + foto setiap berita untuk «Fakta yang boleh anda semak sendiri» |
+| `tools/keratan.mjs` | Salinan penjana skill `/ubai-keratan-akhbar`; build menjalankannya (layout `ori`, HTML) |
 | `tools/build.mjs` | Jana kedua-dua fail HTML; tolak build jika id berulang, `url(#…)` yatim, emoji, frasa terlarang, value stack tak menjumlah, nilai 6 dunia ≠ item "6 Kategori" atau anchor ≠ 2 |
 
 Kedua-dua fail HTML adalah **output**. Ubah dalam `src/`, kemudian `node tools/build.mjs`.
+
+## Seksyen bawah pricing
+
+Susunan: pricing (3 pakej) → objection → impian (laporan ibu bapa) → Kata Pembangun + fakta berita → bukti kelas →
+CTA penutup (3 kad, skrol ke pricing) → FAQ (12 soalan) → footer.
+
+**Ubah atau tambah fakta berita:** sunting `assets/fakta/artikel-*.json` (`tajuk`, `ori.masa`, `ori.kapsyen`,
+`ori.petikan` dengan `<mark>` pada frasa bukti, `foto`), kemudian `node tools/build.mjs`. Fail JSON baru dalam folder
+itu terus jadi kad baru. Kad dibina dalam HTML (rupa screenshot berita yang bersih), bukan gambar, dalam kotak tetap
+600×800. Screenshot asal untuk rujukan ada di `assets/shots/` (`INDEX.md`). Build menolak jika nilai «impian» tidak
+sama dengan item PRO, jika bilangan kad ≠ bilangan JSON, atau jika ada butang selain 3 butang pakej dan 3 kad CTA
+penutup.
 
 ## Preview lokal
 
@@ -20,7 +35,7 @@ Kedua-dua fail HTML adalah **output**. Ubah dalam `src/`, kemudian `node tools/b
 ## Ujian
 
 ```bash
-npx playwright test tests/sales-page.spec.ts
+npx playwright test tests/sales-page.spec.ts tests/seksyen-bawah.spec.ts
 ```
 ```bash
 npx playwright test tests/smoke.spec.ts
@@ -44,7 +59,7 @@ pnpm run deploy
 SMOKE_URL=https://misi3m-sales.lernify18.workers.dev/ npx playwright test tests/smoke.spec.ts --project=chromium --project=webkit-iphone
 ```
 
-Dua butang CTA masih `href="#"`: halaman hidup belum boleh menerima bayaran sehingga pautan sebenar dipasang.
+Tiga butang pakej masih `href="#"`: halaman hidup belum boleh menerima bayaran sehingga pautan sebenar dipasang.
 
 ## Pasang di WordPress / Elementor
 
@@ -58,6 +73,8 @@ Dua butang CTA masih `href="#"`: halaman hidup belum boleh menerima bayaran sehi
    `SAYA NAK PAKEJ PRO — RM89` (cari `data-pkg="basic"` / `data-pkg="pro"`).
 
 Kaveat yang perlu tahu:
+- Gambar dan video seksyen bawah dirujuk sebagai `assets/img/...` (relatif). Dalam WordPress, muat naik folder
+  `assets/img/` dan tukar laluan itu ke URL Media Library, atau gambar tidak muncul.
 - Widget HTML hanya menyimpan `<script>` jika akaun anda ada keupayaan `unfiltered_html` (Administrator pada laman
   tunggal; pada Multisite hanya Super Admin). Tanpa skrip, halaman tetap kelihatan tetapi demo tidak boleh dimain dan
   tahun hak cipta kekal statik.
@@ -102,5 +119,14 @@ Tuntutan komersial ini datang terus dari brief. Saya tidak boleh mengesahkannya:
 6. **Pilihan masa 30s / 1m / Tanpa Had** dan **3 tahap kesukaran**: sahkan ada dalam BASIC.
 7. Kad keputusan tablet menulis **"8 MISI SELESAI"** ikut brief, walaupun satu sesi ialah 8 *soalan*. Tukar kepada
    "8 SOALAN SELESAI" jika game memaparkannya begitu.
+
+8. **Pakej USAHAWAN RM299**: modul bina game dan modul bina sales page sudah siap (atau tarikh buka), dan nilai
+   rujukan RM497 / RM297 / RM197.
+9. **Komisyen reseller 80%** untuk BASIC dan PRO (RM39.20 / RM71.20), cara rekod dan cara bayar (FAQ menyebut
+   «direkod automatik, dibayar ke akaun bank»).
+10. **Akses selepas bayar** «link akses dihantar ke emel» (FAQ): ikut aliran kedai yang akan dipasang.
+11. **Anggaran kos di luar** (tuisyen RM80–150 sebulan, buku RM30–60, app RM20–40 sebulan) dalam seksyen objection.
+12. **Gambar kelas** di seksyen bukti diambil dari page Kelas AI Muar (kelas lepas). Gantikan dengan gambar terbaik
+    kelas Muar 31 Okt bila dipilih dari Photos.
 
 Tiada testimoni, statistik, kiraan pelanggan, kiraan masa (countdown) atau jaminan wang kembali dalam halaman ini.

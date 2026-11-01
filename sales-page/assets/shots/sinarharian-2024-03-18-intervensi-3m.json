@@ -1,0 +1,22 @@
+{
+ "id": "sinarharian-2024-03-18-intervensi-3m",
+ "url": "https://www.sinarharian.com.my/article/655106",
+ "captured": "2026-11-01T09:04:50.624Z",
+ "w": 412,
+ "h": 660,
+ "dpr": 2,
+ "rects": [
+  {
+   "x": 32,
+   "y": 589.1,
+   "w": 338.9,
+   "h": 23.5
+  },
+  {
+   "x": 32,
+   "y": 616.1,
+   "w": 222.5,
+   "h": 23.5
+  }
+ ]
+}

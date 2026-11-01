@@ -2,6 +2,7 @@
 import { sprite, IC, icon, PROB, CMP, shirtArt, applesArt } from './art.mjs';
 import { phone, tablet, monitor } from './devices.mjs';
 import { dashboard, resultCard, gameplay, FEAT } from './screens.mjs';
+import { objection, impian, pembangun, bukti, penutup, faq } from './bawah.mjs';
 
 const ok = `<svg class="m3-tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#m3-check"/></svg>`;
 const no = `<svg class="m3-tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#m3-cross"/></svg>`;
@@ -39,7 +40,24 @@ export const PLANS = [
       ['Pilihan Bahasa Melayu / English', 14],
     ],
   },
+  {
+    key: 'usahawan',
+    title: 'MISI PEMULIHAN 3M — USAHAWAN',
+    ribbon: 'BINA & JUAL',
+    sub: 'Untuk ibu ayah, cikgu dan sesiapa yang nak belajar bina game ini sendiri, dan jana komisyen dengan menjualnya.',
+    ref: 1280,
+    price: 299,
+    items: [
+      ['Semua yang ada dalam PRO', 289],
+      ['Modul Step by Step: Bina Game Ini Sebiji Guna AI', 497],
+      ['Modul Step by Step: Bina Sales Page Ini Sebiji', 297],
+      ['Akaun Reseller + Sales Page Sebiji Dengan Link Anda', 197],
+    ],
+  },
 ];
+
+export const KOMISYEN = 0.8;
+const rm = (n) => n.toFixed(2);
 
 export const FEATURES = [
   {
@@ -230,18 +248,23 @@ function pricing() {
 <span class="m3-rib">${p.ribbon}</span>
 <h3 class="m3-plan-t">${e(p.title)}</h3>
 <p class="m3-plan-sub">${e(p.sub)}</p>
-<div class="m3-price"><span class="m3-ref">Nilai rujukan <s>RM${p.ref}</s></span><span class="m3-now" aria-label="Harga promo RM${p.price}"><small>RM</small>${p.price}</span></div>
+<div class="m3-price"><span class="m3-ref">Nilai rujukan <s>RM${p.ref.toLocaleString('en-MY')}</s></span><span class="m3-now" aria-label="Harga promo RM${p.price}"><small>RM</small>${p.price}</span></div>
 <ul class="m3-items">${p.items.map(([t, v]) => `<li data-v="${v}">${ok}<span>${e(t)}</span><em>Nilai RM${v}</em></li>`).join('')}</ul>
-<div class="m3-sum"><span>Jumlah nilai rujukan</span><b>RM${p.ref}</b></div>
+${p.key === 'usahawan' ? earn() : ''}<div class="m3-sum"><span>Jumlah nilai rujukan</span><b>RM${p.ref.toLocaleString('en-MY')}</b></div>
 <div class="m3-sum m3-sum-now"><span>Harga promo hari ini</span><b>RM${p.price}</b></div>
 <a class="m3-cta" href="#" data-pkg="${p.key}">SAYA NAK PAKEJ ${p.key.toUpperCase()} — RM${p.price}</a>
-<p class="m3-micro">Akses digital • Belajar melalui telefon, tablet atau komputer</p>
+<p class="m3-micro">${p.key === 'usahawan' ? 'Akses modul + akaun reseller' : 'Akses digital • Belajar melalui telefon, tablet atau komputer'}</p>
 </article>`;
+  const price = (k) => PLANS.find((x) => x.key === k).price;
+  const earn = () => `<div class="m3-earn"><p class="m3-earn-h">Komisyen ${KOMISYEN * 100}% setiap jualan</p>
+<div class="m3-earn-row"><span>Setiap jualan BASIC</span><b>RM${rm(price('basic') * KOMISYEN)}</b></div>
+<div class="m3-earn-row"><span>Setiap jualan PRO</span><b>RM${rm(price('pro') * KOMISYEN)}</b></div>
+<p class="m3-earn-n">5 jualan PRO = RM${rm(5 * price('pro') * KOMISYEN)}, lebih dari harga pakej ini. Komisyen bergantung pada jualan anda sendiri.</p></div>`;
   return `<section class="m3-sec m3-pricing" data-sec="pakej" id="m3-pakej" aria-labelledby="m3-h-price">
 <div class="m3-wrap">
 <div class="m3-head m3-rv"><h2 id="m3-h-price" class="m3-h2">Pilih Pakej Yang Sesuai Untuk Anak Anda</h2>
 <p class="m3-sub">Bayar sekali untuk akses kepada pakej permainan yang dipilih. Tiada langganan bulanan bagi tawaran ini.</p></div>
-<div class="m3-plans">${PLANS.map(plan).join('')}</div>
+<div class="m3-plans m3-plans3">${PLANS.map(plan).join('')}</div>
 <p class="m3-fine m3-center">Nilai rujukan ialah anggaran nilai setiap komponen pakej, bukan harga jualan terdahulu.</p>
 </div>
 </section>`;
@@ -256,7 +279,7 @@ function footer() {
 </div></footer>`;
 }
 
-export const body = () =>
+export const body = ({ fakta = [] } = {}) =>
   `<div id="misi3m-sales-root" class="m3">
 ${sprite()}
 ${topBar()}
@@ -267,6 +290,12 @@ ${why()}
 ${demo()}
 ${features()}
 ${pricing()}
+${objection()}
+${impian()}
+${pembangun(fakta)}
+${bukti()}
+${penutup(PLANS)}
+${faq()}
 </div>
 ${footer()}
 </div>`;
