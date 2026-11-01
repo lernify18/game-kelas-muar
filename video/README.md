@@ -7,13 +7,13 @@ Dua versi 9:16 untuk Meta Ads, 15–25 s:
 | `vo` | VO ElevenLabs dari `RAW/` + muzik `footage/` pada 10% + SFX game | Hook (tajuk + SOLUSI PROVEN) atas BTS, kemudian kapsyen gaya Iman perkataan demi perkataan |
 | `pov` | Muzik `footage/` + SFX game (BTS dibisukan) | Hook yang sama, kemudian kapsyen gaya Iman dengan masa tetap (`{ text, at }`) |
 
-B-roll = skrin game sebenar (dari worktree `feat-misi-3m-v1`) dalam mockup telefon/tablet. Bila tiada skrin yang padan,
+B-roll = skrin game sebenar (dari akar projek ini) dalam mockup telefon/tablet. Bila tiada skrin yang padan,
 grafik SVG 3D (`art.js`): buku, bintang, bar komen. Latar = grid hitam dari `footage/`.
 
 ## Jalankan
 
 ```bash
-GW="../feat-misi-3m-v1"; rm -rf .tmp/game && mkdir -p .tmp/game && cp -R "$GW/index.html" "$GW/src" "$GW/sfx" .tmp/game/
+rm -rf .tmp/game && mkdir -p .tmp/game && cp -R index.html src sfx .tmp/game/
 ```
 ```bash
 node tools/video/prep.mjs

@@ -4,4 +4,7 @@ node_modules/
 test-results/
 playwright-report/
 .DS_Store
+/dist/
+# Asal 629 MB melebihi had 100 MB GitHub; versi mampat RAW/IMG_4944-kelas.mp4 (1080p, 88 MB) dikomit
+/RAW/IMG_4944.mov
 out/
