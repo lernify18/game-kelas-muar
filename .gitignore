@@ -9,7 +9,9 @@ playwright-report/
 /RAW/IMG_4944.mov
 out/
 .wrangler/
-# Rahsia dan arahan peribadi tidak masuk repo public
+# Rahsia dan salinan automatik ~/.claude/CLAUDE.md tidak masuk repo public; aturan projek ada dalam .claude/CLAUDE.md
 .env*
 .dev.vars*
-CLAUDE.md
+/CLAUDE.md
+CLAUDE.local.md
+/.claude/settings.local.json
