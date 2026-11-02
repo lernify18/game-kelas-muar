@@ -19,6 +19,7 @@ const BUTS = [
   ['“Saya tak ada masa nak ajar.”', 'Game beri arahan dan petunjuk sendiri. Ibu ayah cuma buka laporan untuk tengok apa anak dah kuasai.'],
   ['“Anak dah belajar di sekolah.”', 'Sebab itulah ia berkesan. Kemahiran yang sama diulang di rumah dalam bentuk permainan, dan ulangan itulah yang buat anak benar-benar kuasai 3M.'],
 ];
+const BUT_USAHAWAN = ['“Saya nak jual, tapi tak pandai run ads.”', 'Dalam pakej USAHAWAN, kedai, sales page dan produk dah siap untuk anda. Modul Run Ads Reseller tunjuk cara set iklan FB & IG langkah demi langkah, terus ke kedai anda.'];
 
 export function objection() {
   return `<section class="m3-sec m3-obj" data-sec="objection" aria-labelledby="m3-h-obj">
@@ -31,7 +32,8 @@ ${COSTS.map(([a, b, c]) => `<div class="m3-cost-row"><span class="m3-cost-k">${e
 </div>
 <p class="m3-fine m3-center">Harga di luar ialah anggaran pasaran dan berbeza ikut tempat.</p>
 <div class="m3-value"><span>Nilai rujukan pakej PRO</span><s>RM289</s><span>Anda bayar</span><b>RM89</b></div>
-<div class="m3-buts">${BUTS.map(([q, a]) => `<div class="m3-but m3-rv"><p class="m3-but-q">${e(q)}</p><p>${e(a)}</p></div>`).join('')}</div>
+<div class="m3-buts">${BUTS.map(([q, a]) => `<div class="m3-but m3-rv"><p class="m3-but-q">${e(q)}</p><p>${e(a)}</p></div>`).join('')}
+<div class="m3-but m3-but-us m3-rv"><span class="m3-but-k">PAKEJ USAHAWAN</span><p class="m3-but-q">${e(BUT_USAHAWAN[0])}</p><p>${e(BUT_USAHAWAN[1])}</p></div></div>
 </div>
 </section>`;
 }
@@ -144,7 +146,7 @@ export function bukti() {
 }
 
 export function penutup(plans) {
-  const blurb = { basic: '6 dunia, 5 aktiviti, kad markah', pro: 'Semua BASIC + laporan ibu bapa', usahawan: 'Semua PRO + modul bina & jual' };
+  const blurb = { basic: '6 dunia, 5 aktiviti, kad markah', pro: 'Semua BASIC + laporan ibu bapa', usahawan: 'Semua PRO + kedai sendiri, 100% hasil' };
   return `<section class="m3-sec m3-end" data-sec="cta" aria-labelledby="m3-h-end">
 <div class="m3-wrap">
 <div class="m3-head m3-rv"><h2 id="m3-h-end" class="m3-h2">Mulakan Misi Anak Anda Hari Ini</h2>
@@ -168,8 +170,9 @@ export const FAQS = [
   ['Adakah isi kandungannya ikut sekolah?', 'Kandungan disusun berpandukan DSKP KSSR (Semakan 2017) dan Modul Bimbingan (MOBIM) Bahasa Melayu dan Matematik Tahun 1. Ia alat sokongan pembelajaran dan bukan produk rasmi KPM.'],
   ['Data anak saya disimpan di mana?', 'Kemajuan disimpan dalam peranti anda sahaja. Tiada akaun untuk didaftar dan tiada data anak dihantar ke server.'],
   ['Macam mana saya dapat akses selepas bayar?', 'Selepas bayaran berjaya, link akses dihantar ke emel anda. Simpan emel itu untuk buka game bila-bila masa.'],
-  ['Pakej USAHAWAN: perlu tahu coding?', 'Tidak perlu. Modul tunjuk langkah demi langkah cara bina game dan sales page ini guna AI, sama seperti yang diajar dalam kelas.'],
-  ['Bila dan macam mana komisyen 80% dibayar?', 'Setiap jualan melalui link reseller anda direkod secara automatik, dan komisyen dibayar ke akaun bank anda.'],
+  ['Pakej USAHAWAN: perlu tahu coding?', 'Tidak perlu. Modul tunjuk langkah demi langkah cara bina game dan sales page ini guna AI, dan cara pasang iklan FB & IG ke kedai anda.'],
+  ['Macam mana saya dapat 100% hasil jualan?', 'Anda jual BASIC dan PRO dari kedai e-dagang anda sendiri, dengan payment gateway atas nama anda. Pembeli bayar terus ke akaun anda, jadi seluruh harga jualan milik anda, tolak caj gateway anda sendiri.'],
+  ['Pakej USAHAWAN: apa jadi pada kedai selepas 1 tahun?', 'Kedai e-dagang aktif selama 1 tahun dari tarikh diaktifkan. Selepas itu anda boleh sambung langganan kedai pada harga semasa.'],
 ];
 
 export function faq() {

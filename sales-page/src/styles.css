@@ -406,6 +406,10 @@ $R .m3-buts{display:grid;gap:14px;max-width:980px;margin:34px auto 0}
 $R .m3-but{padding:18px 20px;border-radius:20px;background:var(--cream);border:1.5px solid #F0E6D2}
 $R .m3-but-q{font-family:var(--fh);font-weight:800;font-size:17px;color:var(--pd);margin-bottom:6px}
 $R .m3-but p+p{color:#3A3A5A}
+$R .m3-but-us{background:linear-gradient(180deg,#2E1D5C 0%,#1A1033 100%);border-color:#E7B84A}
+$R .m3-but-us .m3-but-q{color:#FFD66D}
+$R .m3-but-us p+p{color:#F3EEFF}
+$R .m3-but-k{display:inline-block;margin-bottom:8px;padding:3px 10px;border-radius:999px;background:linear-gradient(90deg,#FFE48F,#E7B84A);color:#2A1B45;font-family:var(--fh);font-weight:800;font-size:11.5px;letter-spacing:.08em}
 
 /* 2. dream result */
 $R .m3-dream{background:linear-gradient(180deg,#F3EEFF 0%,#FFF9EF 100%)}
@@ -494,6 +498,7 @@ $R .m3-faq details p{padding:0 18px 16px;color:#3A3A5A}
 $R .m3-plans3 .m3-plan-usahawan{grid-column:1/-1;max-width:560px;width:100%;justify-self:center}
 $R .m3-cost-row{grid-template-columns:1.1fr 1fr 1.3fr;align-items:center;gap:14px}
 $R .m3-buts{grid-template-columns:repeat(2,minmax(0,1fr))}
+$R .m3-but-us{grid-column:1/-1}
 $R .m3-quote{grid-template-columns:280px 1fr;align-items:center;padding:28px;gap:30px}
 $R .m3-gal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 $R .m3-mini{grid-template-columns:repeat(3,minmax(0,1fr))}

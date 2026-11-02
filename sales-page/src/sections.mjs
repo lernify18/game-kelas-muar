@@ -44,19 +44,22 @@ export const PLANS = [
     key: 'usahawan',
     title: 'MISI PEMULIHAN 3M — USAHAWAN',
     ribbon: 'BINA & JUAL',
-    sub: 'Untuk ibu ayah, cikgu dan sesiapa yang nak belajar bina game ini sendiri, dan jana komisyen dengan menjualnya.',
-    ref: 1280,
+    sub: 'Untuk ibu ayah, cikgu dan sesiapa yang nak bina game ini sendiri, kemudian jual dari kedai sendiri dan simpan 100% hasil jualan.',
+    ref: 1876,
     price: 299,
     items: [
       ['Semua yang ada dalam PRO', 289],
       ['Modul Step by Step: Bina Game Ini Sebiji Guna AI', 497],
       ['Modul Step by Step: Bina Sales Page Ini Sebiji', 297],
-      ['Akaun Reseller + Sales Page Sebiji Dengan Link Anda', 197],
+      ['Modul Run Ads Reseller: Iklan FB & IG Terus Ke Kedai Anda', 297],
+      ['Website E-Dagang Sellhiz 1 Tahun (Pelan Starter)', 299],
+      ['Lesen Reseller BASIC & PRO + Sales Page Ini Dalam Kedai Anda', 197],
     ],
   },
 ];
 
-export const KOMISYEN = 0.8;
+// Resellers sell from their own store and gateway, so the whole sale is theirs (Ubai chose option A, 2026-11-03).
+export const KOMISYEN = 1;
 const rm = (n) => n.toFixed(2);
 
 export const FEATURES = [
@@ -253,13 +256,15 @@ function pricing() {
 ${p.key === 'usahawan' ? earn() : ''}<div class="m3-sum"><span>Jumlah nilai rujukan</span><b>RM${p.ref.toLocaleString('en-MY')}</b></div>
 <div class="m3-sum m3-sum-now"><span>Harga promo hari ini</span><b>RM${p.price}</b></div>
 <a class="m3-cta" href="#" data-pkg="${p.key}">SAYA NAK PAKEJ ${p.key.toUpperCase()} — RM${p.price}</a>
-<p class="m3-micro">${p.key === 'usahawan' ? 'Akses modul + akaun reseller' : 'Akses digital • Belajar melalui telefon, tablet atau komputer'}</p>
+<p class="m3-micro">${p.key === 'usahawan' ? 'Akses modul + kedai e-dagang 1 tahun' : 'Akses digital • Belajar melalui telefon, tablet atau komputer'}</p>
 </article>`;
   const price = (k) => PLANS.find((x) => x.key === k).price;
-  const earn = () => `<div class="m3-earn"><p class="m3-earn-h">Komisyen ${KOMISYEN * 100}% setiap jualan</p>
+  const proSale = price('pro') * KOMISYEN;
+  const payback = Math.floor(price('usahawan') / proSale) + 1;
+  const earn = () => `<div class="m3-earn"><p class="m3-earn-h">${KOMISYEN * 100}% hasil jualan masuk akaun anda</p>
 <div class="m3-earn-row"><span>Setiap jualan BASIC</span><b>RM${rm(price('basic') * KOMISYEN)}</b></div>
-<div class="m3-earn-row"><span>Setiap jualan PRO</span><b>RM${rm(price('pro') * KOMISYEN)}</b></div>
-<p class="m3-earn-n">5 jualan PRO = RM${rm(5 * price('pro') * KOMISYEN)}, lebih dari harga pakej ini. Komisyen bergantung pada jualan anda sendiri.</p></div>`;
+<div class="m3-earn-row"><span>Setiap jualan PRO</span><b>RM${rm(proSale)}</b></div>
+<p class="m3-earn-n">${payback} jualan PRO = RM${rm(payback * proSale)}, dah lebih dari harga pakej ini. Pembeli bayar terus ke kedai anda. Hasil bergantung pada jualan anda sendiri.</p></div>`;
   return `<section class="m3-sec m3-pricing" data-sec="pakej" id="m3-pakej" aria-labelledby="m3-h-price">
 <div class="m3-wrap">
 <div class="m3-head m3-rv"><h2 id="m3-h-price" class="m3-h2">Pilih Pakej Yang Sesuai Untuk Anak Anda</h2>

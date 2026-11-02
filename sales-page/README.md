@@ -17,8 +17,8 @@ Kedua-dua fail HTML adalah **output**. Ubah dalam `src/`, kemudian `node tools/b
 
 ## Seksyen bawah pricing
 
-Susunan: pricing (3 pakej) → objection → impian (laporan ibu bapa) → Kata Pembangun + fakta berita → bukti kelas →
-CTA penutup (3 kad, skrol ke pricing) → FAQ (12 soalan) → footer.
+Susunan: pricing (3 pakej) → objection (4 kad ibu bapa + 1 kad USAHAWAN) → impian (laporan ibu bapa) → Kata Pembangun + fakta berita → bukti kelas →
+CTA penutup (3 kad, skrol ke pricing) → FAQ (13 soalan) → footer.
 
 **Ubah atau tambah fakta berita:** sunting `assets/fakta/artikel-*.json` (`tajuk`, `ori.masa`, `ori.kapsyen`,
 `ori.petikan` dengan `<mark>` pada frasa bukti, `foto`), kemudian `node tools/build.mjs`. Fail JSON baru dalam folder
@@ -124,14 +124,26 @@ Tuntutan komersial ini datang terus dari brief. Saya tidak boleh mengesahkannya:
 7. Kad keputusan tablet menulis **"8 MISI SELESAI"** ikut brief, walaupun satu sesi ialah 8 *soalan*. Tukar kepada
    "8 SOALAN SELESAI" jika game memaparkannya begitu.
 
-8. **Pakej USAHAWAN RM299**: modul bina game dan modul bina sales page sudah siap (atau tarikh buka), dan nilai
-   rujukan RM497 / RM297 / RM197.
-9. **Komisyen reseller 80%** untuk BASIC dan PRO (RM39.20 / RM71.20), cara rekod dan cara bayar (FAQ menyebut
-   «direkod automatik, dibayar ke akaun bank»).
+8. **Pakej USAHAWAN RM299**: modul bina game, modul bina sales page dan **Modul Run Ads Reseller** sudah siap (atau
+   tarikh buka), dan nilai rujukan RM497 / RM297 / RM297 / RM197. RM297 untuk Run Ads ialah andaian.
+9. ~~Komisyen reseller 80%~~ **Diputuskan 2026-11-03: 100% hasil jualan, cara A (kedai sendiri).** Reseller jual BASIC
+   dan PRO dari kedai Sellhiz sendiri dengan gateway atas nama sendiri, jadi pembeli bayar terus kepadanya. Affiliate di
+   kedai Ubai tidak dipakai: Sellhiz menghadkan komisyen peratus pada 90% (`shared/schemas.ts`, ruang untuk caj
+   gateway). Masih perlu disahkan:
+   - reseller wajib jual pada RM49 / RM89? Sistem tak boleh paksa harga dalam kedai orang lain, jadi ia syarat bertulis;
+   - reseller jual BASIC dan PRO sahaja, bukan USAHAWAN (tiada komisyen atas rekrut, Akta 500);
+   - reseller daftar ToyyibPay / CHIP sendiri: perlu diajar dalam modul?
+   - pembeli reseller dapat link game yang sama; ciri PRO belum dikunci ikut pakej (perkara 1).
 10. **Akses selepas bayar** «link akses dihantar ke emel» (FAQ): ikut aliran kedai yang akan dipasang.
 11. **Anggaran kos di luar** (tuisyen RM80–150 sebulan, buku RM30–60, app RM20–40 sebulan) dalam seksyen objection.
 12. ~~Gambar kelas dari page Kelas AI Muar (kelas lepas)~~ **Selesai 2026-11-02:** galeri Bukti kini 8 gambar dan video
     15 saat dari kelas Muar 31 Okt 2026, dieksport dari Photos (`RAW/kelas-terkini/`, diabaikan git). Satu gambar dan
     separuh video ialah Misi Pemulihan 3M dimain di laptop kelas (IMG_5038).
+13. **Website E-Dagang Sellhiz 1 Tahun = pelan Starter** (RM299 / 12 bulan, harga awam `sellhiz.win/api/plans` pada
+    2026-11-03: semua gateway, tiada split, 10 page, 20 produk, LMS, tiada custom domain). Sahkan: Starter dan bukan Pro;
+    cara serah (kod akses pelan 12 bulan selepas bayar?); dan selepas setahun. FAQ hanya menulis «boleh sambung
+    langganan kedai pada harga semasa». Ikut nota Julai, pelan berbayar yang tamat jatuh ke tahap Trial (split 10%,
+    ToyyibPay sahaja, 3 produk); semak semula sebelum menulis lebih.
+14. **Nama "Sellhiz" pada kad** (tiada nama domain). Tukar kepada «Website E-Dagang Siap Guna» jika Ubai tak mahu jenama.
 
 Tiada testimoni, statistik, kiraan pelanggan, kiraan masa (countdown) atau jaminan wang kembali dalam halaman ini.
