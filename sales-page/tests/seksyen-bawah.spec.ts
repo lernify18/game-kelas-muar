@@ -101,8 +101,11 @@ test('class proof: 8 photos and the video load; reduced motion stops autoplay', 
     await im.evaluate((x: HTMLImageElement) => (x.complete ? null : new Promise((r) => { x.onload = x.onerror = r; })));
     expect(await im.evaluate((x: HTMLImageElement) => x.naturalWidth)).toBeGreaterThan(0);
   }
+  expect(await imgs.evaluateAll((xs) => xs.every((x) => /\/kelas31-[a-z]+\.webp$/.test((x as HTMLImageElement).src)))).toBe(true);
   const v = page.locator('[data-sec="bukti"] video');
-  await expect(v).toHaveAttribute('poster', 'assets/img/bts-kelas-poster.webp');
+  await expect(v).toHaveAttribute('poster', 'assets/img/kelas-31okt-poster.webp');
+  await expect(v).toHaveAttribute('src', 'assets/img/kelas-31okt.mp4');
+  await expect(page.locator('[data-sec="bukti"] .m3-sub')).toContainText('31 Oktober 2026');
   expect(await v.evaluate((x: HTMLVideoElement) => ({ paused: x.paused, controls: x.controls, auto: x.hasAttribute('autoplay') }))).toEqual({ paused: true, controls: true, auto: false });
   expect(errors).toEqual([]);
 });

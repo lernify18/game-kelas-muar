@@ -120,23 +120,23 @@ export function pembangun(fakta) {
 }
 
 export const SHOTS = [
-  ['bts-dewan-lernify', 'Dewan penuh, semua dengan laptop'],
-  ['bts-mic-dewan', 'Terangkan langkah depan dewan'],
-  ['bts-coding-pentas', 'Bina terus di skrin besar'],
-  ['bts-game-skrin', 'Game kuiz ditayang di skrin dewan'],
-  ['bts-coaching', 'Bantu peserta terus di meja'],
-  ['bts-antara-peserta', 'Turun padang antara peserta'],
-  ['bts-peserta-laptop', 'Peserta ikut langkah di laptop sendiri'],
-  ['bts-game-laptop', 'Demo game edu yang dibina guna AI'],
+  ['kelas31-dewan', 'Dewan penuh, setiap peserta dengan laptop'],
+  ['kelas31-mic', 'Rancang game ikut modul KPM di sekolah'],
+  ['kelas31-juara', 'Misi Pemulihan 3M dimain di laptop kelas'],
+  ['kelas31-ajar', 'Ajar langkah demi langkah, peserta ikut'],
+  ['kelas31-aliran', 'Lakar aliran sales page: result, demo, CTA'],
+  ['kelas31-skrin', 'Huraikan langkah di skrin sentuh besar'],
+  ['kelas31-meja', 'Peserta bina terus di laptop sendiri'],
+  ['kelas31-idea', 'Bentang idea game pendidikan di skrin dewan'],
 ];
 
 export function bukti() {
   return `<section class="m3-sec m3-proof" data-sec="bukti" aria-labelledby="m3-h-proof">
 <div class="m3-wrap">
 <div class="m3-head m3-rv"><span class="m3-eyebrow">DARI KELAS KE GAME SEBENAR</span><h2 id="m3-h-proof" class="m3-h2">Game Ini Lahir Dari Kelas Game AI Saya. Ini Gambar Sebenar, Bukan Gambar Stok.</h2>
-<p class="m3-sub">Misi Pemulihan 3M dibina langkah demi langkah dalam kelas Game AI saya. Langkah yang sama diajar dalam modul pakej USAHAWAN.</p></div>
+<p class="m3-sub">Misi Pemulihan 3M dibina langkah demi langkah dalam kelas Game AI saya. Gambar dan video ini dari kelas di Muar, 31 Oktober 2026. Langkah yang sama diajar dalam modul pakej USAHAWAN.</p></div>
 <div class="m3-gal">
-<figure class="m3-gal-vid m3-rv"><video src="${IMG}bts-kelas.mp4" poster="${IMG}bts-kelas-poster.webp" autoplay muted loop playsinline preload="metadata" width="540" height="960" aria-label="Video 12 saat dari kelas fizikal Game AI"></video><figcaption><b>VIDEO KELAS</b> 12 saat: dewan berlaptop, bina terus di skrin besar.</figcaption></figure>
+<figure class="m3-gal-vid m3-rv"><video src="${IMG}kelas-31okt.mp4" poster="${IMG}kelas-31okt-poster.webp" autoplay muted loop playsinline preload="metadata" width="540" height="960" aria-label="Video 15 saat dari kelas Game AI di Muar, 31 Oktober 2026"></video><figcaption><b>VIDEO KELAS</b> 15 saat: dewan penuh, kemudian Misi Pemulihan 3M dimain di laptop kelas.</figcaption></figure>
 <div class="m3-gal-grid">${SHOTS.map(([f, c]) => `<figure class="m3-rv"><img src="${IMG}${f}.webp" alt="${esc(c)}" width="720" height="900" loading="lazy" decoding="async"><figcaption>${e(c)}</figcaption></figure>`).join('')}</div>
 </div>
 </div>

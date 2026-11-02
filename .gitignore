@@ -15,3 +15,6 @@ out/
 /CLAUDE.md
 CLAUDE.local.md
 /.claude/settings.local.json
+# Eksport penuh dari Photos (ratusan MB, wajah peserta); hanya pilihan WebP dalam sales-page/assets/img dikomit
+/RAW/kelas-terkini/
+/RAW/kelas-terkini.log

@@ -8,7 +8,7 @@ SVG, CSS dan JavaScript ringan, tanpa gambar luar dan tanpa library animasi.
 | `misi-pemulihan-3m-sales-page.html` | Halaman penuh, terus boleh dibuka atau dimuat naik |
 | `misi3m-elementor-embed.html` | Kandungan yang sama tanpa `<html>/<head>/<body>`, untuk widget HTML Elementor |
 | `src/` | Sumber: `art.mjs` (sprite SVG, ikon, ilustrasi), `devices.mjs`, `screens.mjs`, `sections.mjs` (copy hingga pricing), `bawah.mjs` (seksyen bawah pricing), `styles.css`, `app.js` |
-| `assets/img/` | Foto trainer, 8 gambar kelas dan video 12 saat (seksyen Kata Pembangun dan Bukti); build menyalinnya ke `dist/assets/img/` |
+| `assets/img/` | Foto trainer, 8 gambar kelas Muar 31 Okt 2026 dan video 15 saat (seksyen Kata Pembangun dan Bukti); build menyalinnya ke `dist/assets/img/` |
 | `assets/fakta/` | Satu JSON + foto setiap berita untuk «Fakta yang boleh anda semak sendiri» |
 | `tools/keratan.mjs` | Salinan penjana skill `/ubai-keratan-akhbar`; build menjalankannya (layout `ori`, HTML) |
 | `tools/build.mjs` | Jana kedua-dua fail HTML; tolak build jika id berulang, `url(#…)` yatim, emoji, frasa terlarang, value stack tak menjumlah, nilai 6 dunia ≠ item "6 Kategori" atau anchor ≠ 2 |
@@ -130,7 +130,8 @@ Tuntutan komersial ini datang terus dari brief. Saya tidak boleh mengesahkannya:
    «direkod automatik, dibayar ke akaun bank»).
 10. **Akses selepas bayar** «link akses dihantar ke emel» (FAQ): ikut aliran kedai yang akan dipasang.
 11. **Anggaran kos di luar** (tuisyen RM80–150 sebulan, buku RM30–60, app RM20–40 sebulan) dalam seksyen objection.
-12. **Gambar kelas** di seksyen bukti diambil dari page Kelas AI Muar (kelas lepas). Gantikan dengan gambar terbaik
-    kelas Muar 31 Okt bila dipilih dari Photos.
+12. ~~Gambar kelas dari page Kelas AI Muar (kelas lepas)~~ **Selesai 2026-11-02:** galeri Bukti kini 8 gambar dan video
+    15 saat dari kelas Muar 31 Okt 2026, dieksport dari Photos (`RAW/kelas-terkini/`, diabaikan git). Satu gambar dan
+    separuh video ialah Misi Pemulihan 3M dimain di laptop kelas (IMG_5038).
 
 Tiada testimoni, statistik, kiraan pelanggan, kiraan masa (countdown) atau jaminan wang kembali dalam halaman ini.
