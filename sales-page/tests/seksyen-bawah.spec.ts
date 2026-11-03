@@ -76,9 +76,14 @@ test('objection and dream result: RM numbers agree with the pricing table', asyn
   expect(errors).toEqual([]);
 });
 
-test('news facts: built from the JSON, inside the 600×800 frame, photo uncropped, no links', async ({ page }) => {
+test('news facts: own section after the problems, built from the JSON, inside the 600×800 frame, photo uncropped, no links', async ({ page }) => {
   const errors = await open(page);
-  const sec = page.locator('[data-sec="pembangun"]');
+  const sec = page.locator('[data-sec="fakta"]');
+  await expect(sec).toHaveCount(1);
+  expect(await sec.evaluate((s) => s.previousElementSibling?.getAttribute('data-sec'))).toBe('masalah');
+  await expect(sec.locator('h2')).toContainText('Belum Kuasai 3M');
+  await expect(page.locator('[data-sec="pembangun"] .kr-ocard')).toHaveCount(0);
+  await expect(page.locator('[data-sec="pembangun"] .m3-quote')).toHaveCount(1);
   await sec.scrollIntoViewIfNeeded();
   const cards = sec.locator('.kr-ocard');
   await expect(cards).toHaveCount(FAKTA.length);
@@ -158,7 +163,7 @@ for (const width of [375, 1440]) {
     test.skip(isMobile, 'width sweep runs in the desktop browsers');
     await page.setViewportSize({ width, height: 900 });
     await open(page);
-    await page.locator('[data-sec="pembangun"]').scrollIntoViewIfNeeded();
+    await page.locator('[data-sec="fakta"]').scrollIntoViewIfNeeded();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
     const grid = (await page.locator('.m3-buts').boundingBox())!.width;
     expect(Math.abs((await page.locator('.m3-but-us').boundingBox())!.width - grid)).toBeLessThan(2);

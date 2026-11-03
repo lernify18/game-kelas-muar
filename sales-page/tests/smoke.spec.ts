@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 
 const URL = process.env.SMOKE_URL || 'http://misi3m.test/misi-pemulihan-3m-sales-page.html';
-const SECTIONS = ['top-bar', 'hero', 'masalah', 'beza', 'demo', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
+const SECTIONS = ['top-bar', 'hero', 'masalah', 'fakta', 'beza', 'demo', 'siapa', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
 
 test('real page loads, every section renders, demo plays to the result card', async ({ page }) => {
   const errors: string[] = [];
@@ -32,18 +32,18 @@ test('real page: class photos and video load, news facts render, closing CTA ret
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto(URL, { waitUntil: 'networkidle' });
   // Images are loading="lazy": bring each into view (a phone screen shows only one or two) and let it decode.
-  const imgs = page.locator('[data-sec="pembangun"] img, [data-sec="bukti"] img');
+  const imgs = page.locator('[data-sec="fakta"] img, [data-sec="pembangun"] img, [data-sec="bukti"] img');
   for (let i = 0; i < (await imgs.count()); i++) {
     await imgs.nth(i).scrollIntoViewIfNeeded();
     await imgs.nth(i).evaluate((im: HTMLImageElement) => (im.complete ? null : new Promise((r) => { im.onload = im.onerror = r; })));
   }
-  const broken = await page.$$eval('[data-sec="pembangun"] img, [data-sec="bukti"] img', (imgs) =>
+  const broken = await page.$$eval('[data-sec="fakta"] img, [data-sec="pembangun"] img, [data-sec="bukti"] img', (imgs) =>
     imgs.filter((i) => !(i as HTMLImageElement).complete || (i as HTMLImageElement).naturalWidth === 0).map((i) => (i as HTMLImageElement).src),
   );
   expect(broken).toEqual([]);
   expect(await page.locator('[data-sec="bukti"] video').evaluate((v: HTMLVideoElement) => v.readyState)).toBeGreaterThan(0);
-  await expect(page.locator('[data-sec="pembangun"] .kr-ocard')).toHaveCount(2);
-  await expect(page.locator('[data-sec="pembangun"] .kr-src').first()).toContainText('Sinar Harian');
+  await expect(page.locator('[data-sec="fakta"] .kr-ocard')).toHaveCount(2);
+  await expect(page.locator('[data-sec="fakta"] .kr-src').first()).toContainText('Sinar Harian');
 
   await page.locator('a.m3-mini-pro').click();
   await expect(page.locator('#m3-pakej')).toBeInViewport();

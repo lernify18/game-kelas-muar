@@ -1,4 +1,4 @@
-// Sections below the pricing table (brief 2B): objection, dream result, developer note + news facts, class proof,
+// Sections below the pricing table (brief 2B): objection, dream result, developer note, class proof,
 // closing CTA and FAQ. Copy is Bahasa Melayu Malaysia; RM values here must match the pricing items (build checks).
 import { T, use, esc } from './art.mjs';
 import { phone } from './devices.mjs';
@@ -99,7 +99,7 @@ export function impian() {
 </section>`;
 }
 
-export function pembangun(fakta) {
+export function pembangun() {
   return `<section class="m3-sec m3-rev" data-sec="pembangun" aria-labelledby="m3-h-rev">
 <div class="m3-wrap">
 <div class="m3-head m3-rv"><span class="m3-eyebrow">KATA PEMBANGUN</span><h2 id="m3-h-rev" class="m3-h2">Kenapa Saya Bina Game Ini, Dan Kenapa Ia Selari Dengan Sekolah</h2></div>
@@ -113,9 +113,6 @@ export function pembangun(fakta) {
 <p class="m3-role">Pembangun Misi Pemulihan 3M · Pembina game edu Jawi Kids, Math Kids, Kids Baca dan Kids Tracing</p>
 </div>
 </div>
-<p class="m3-facts-h">Fakta yang boleh anda semak sendiri</p>
-<p class="m3-swipe" aria-hidden="true">Leret ke kanan untuk berita seterusnya</p>
-<div class="m3-facts">${fakta.map((f) => `<div class="m3-kr">${f}</div>`).join('')}</div>
 <p class="m3-fine m3-center">Misi Pemulihan 3M ialah produk pembelajaran bebas. Ia bukan produk rasmi atau diperakui oleh KPM.</p>
 </div>
 </section>`;

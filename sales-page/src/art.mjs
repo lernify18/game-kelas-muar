@@ -231,6 +231,14 @@ export const IC = {
     `<rect x="22" y="4" width="20" height="10" rx="4" fill="url(#m3-lCoral)"/>` +
     `<path d="M18 46 L27 36 L34 41 L46 25" stroke="#7856E8" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>` +
     `<circle cx="46" cy="25" r="3.6" fill="#FFD66D" stroke="#E2952C" stroke-width="1"/>` + T(32, 54, 'LAPORAN', { s: 6, f: '#8A6BB8' }),
+  kedai: () =>
+    shadow(32, 59, 24, 3) +
+    `<rect x="9" y="24" width="46" height="33" rx="5" fill="url(#m3-lCream)" stroke="#E7D3B2" stroke-width="1.3"/>` +
+    `<rect x="14" y="33" width="10" height="9" rx="2.5" fill="url(#m3-lSky)"/><rect x="40" y="33" width="10" height="9" rx="2.5" fill="url(#m3-lSky)"/>` +
+    `<rect x="27" y="36" width="10" height="21" rx="3" fill="url(#m3-lPurple)"/><circle cx="34" cy="47" r="1.2" fill="#FFD66D"/>` +
+    [0, 1, 2, 3].map((i) => `<path d="M${7 + i * 12.5} 15 h12.5 v9 a6.25 4.5 0 0 1 -12.5 0Z" fill="${i % 2 ? '#FFF4F6' : 'url(#m3-lCoral)'}"/>`).join('') +
+    `<rect x="8" y="12" width="48" height="5" rx="2.5" fill="url(#m3-lCoral)"/><rect x="10" y="12.5" width="44" height="1.8" rx=".9" fill="#fff" opacity=".35"/>` +
+    `<circle cx="51" cy="10" r="8" fill="url(#m3-lSun)" stroke="#E2952C" stroke-width="1"/>` + T(51, 12.6, 'RM', { s: 7, f: '#9A5B00' }) + hl(48, 7, 3, 1.6, -30, 0.45),
 };
 
 /* ---------- people ---------- */

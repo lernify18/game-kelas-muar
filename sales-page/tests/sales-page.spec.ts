@@ -7,7 +7,7 @@ import { serve } from '../tools/serve.mjs';
 
 const dir = fileURLToPath(new URL('..', import.meta.url));
 const PAGE = '/misi-pemulihan-3m-sales-page.html';
-const FLOW = ['top-bar', 'hero', 'masalah', 'beza', 'demo', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
+const FLOW = ['top-bar', 'hero', 'masalah', 'fakta', 'beza', 'demo', 'siapa', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
 
 const hostPage = () => `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>*{box-sizing:content-box}body{font-family:Georgia,serif;margin:0}h1,h2,h3{color:rgb(200,0,0);font-size:60px;text-transform:uppercase;margin:2em 0}
@@ -97,6 +97,28 @@ test('flow, guardrails and honest pricing', async ({ page }) => {
     return { dup: ids.filter((v, i) => ids.indexOf(v) !== i), orphan: used.filter((u) => !ids.includes(u)) };
   });
   expect(refs).toEqual({ dup: [], orphan: [] });
+  expect(errors).toEqual([]);
+});
+
+test('siapa: six personas right before what the customer gets, each with a benefit and a dream, USAHAWAN last', async ({ page }) => {
+  const errors = await open(page);
+  const sec = page.locator('[data-sec="siapa"]');
+  expect(await sec.evaluate((s) => s.nextElementSibling?.getAttribute('data-sec'))).toBe('dapat');
+  await expect(sec.locator('h2')).toContainText('Sesuai Untuk Siapa');
+  const cards = sec.locator('.m3-who');
+  await expect(cards).toHaveCount(6);
+  for (const c of await cards.all()) {
+    await expect(c.locator('h3')).not.toBeEmpty();
+    await expect(c.locator('svg.m3-ic')).toHaveCount(1);
+    await expect(c.locator('.m3-who-m b')).toHaveText('Manfaat:');
+    await expect(c.locator('.m3-who-i b')).toHaveText('Impian:');
+  }
+  const us = cards.last();
+  await expect(us).toHaveClass(/m3-who-us/);
+  await expect(us.locator('.m3-but-k')).toHaveText('PAKEJ USAHAWAN');
+  await expect(us).toContainText('100% hasil jualan');
+  await expect(sec.locator('a, button')).toHaveCount(0);
+  await expect(sec).toContainText('bukan pengganti guru');
   expect(errors).toEqual([]);
 });
 

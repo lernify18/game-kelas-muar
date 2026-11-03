@@ -15,9 +15,14 @@ SVG, CSS dan JavaScript ringan, tanpa gambar luar dan tanpa library animasi.
 
 Kedua-dua fail HTML adalah **output**. Ubah dalam `src/`, kemudian `node tools/build.mjs`.
 
+## Susunan seksyen
+
+Atas pricing: hero → masalah → fakta berita (KPM, MOBIM) → beza → demo → sesuai untuk siapa (6 golongan, Manfaat +
+Impian, kad terakhir USAHAWAN) → 6 dunia (apa yang anda dapat).
+
 ## Seksyen bawah pricing
 
-Susunan: pricing (3 pakej) → objection (4 kad ibu bapa + 1 kad USAHAWAN) → impian (laporan ibu bapa) → Kata Pembangun + fakta berita → bukti kelas →
+Susunan: pricing (3 pakej) → objection (4 kad ibu bapa + 1 kad USAHAWAN) → impian (laporan ibu bapa) → Kata Pembangun → bukti kelas →
 CTA penutup (3 kad, skrol ke pricing) → FAQ (13 soalan) → footer.
 
 **Ubah atau tambah fakta berita:** sunting `assets/fakta/artikel-*.json` (`tajuk`, `ori.masa`, `ori.kapsyen`,
@@ -145,5 +150,8 @@ Tuntutan komersial ini datang terus dari brief. Saya tidak boleh mengesahkannya:
     langganan kedai pada harga semasa». Ikut nota Julai, pelan berbayar yang tamat jatuh ke tahap Trial (split 10%,
     ToyyibPay sahaja, 3 produk); semak semula sebelum menulis lebih.
 14. **Nama "Sellhiz" pada kad** (tiada nama domain). Tukar kepada «Website E-Dagang Siap Guna» jika Ubai tak mahu jenama.
+15. **6 golongan dalam «Sesuai Untuk Siapa»** (draf 2026-11-03): prasekolah 5–6, Tahun 1–3 belum lancar, cepat bosan,
+    ibu ayah bekerja, cikgu / guru tadika / guru pemulihan, dan pembina game (USAHAWAN). Sahkan golongan cikgu: tiada
+    lesen kelas ditawarkan, jadi kad itu bercakap tentang murid berlatih di rumah.
 
 Tiada testimoni, statistik, kiraan pelanggan, kiraan masa (countdown) atau jaminan wang kembali dalam halaman ini.

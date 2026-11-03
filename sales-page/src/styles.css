@@ -68,6 +68,29 @@ $R .m3-pc-n{display:inline-block;font-family:var(--fg);font-weight:700;color:var
 $R .m3-pcard p{margin-top:8px;color:var(--muted)}
 $R .m3-bridge{max-width:720px;margin:30px auto 0;text-align:center;font-family:var(--fh);font-weight:800;font-size:clamp(17px,.6vw + 15px,21px);color:var(--pd)}
 
+/* facts: news clippings right after the problems */
+$R .m3-fakta{background:linear-gradient(180deg,#fff 0%,#FFF9EF 100%)}
+
+/* who it suits: 6 personas, benefit + dream */
+$R .m3-who-sec{background:linear-gradient(180deg,#EAF6FF 0%,#fff 100%)}
+$R .m3-whos{display:grid;gap:14px;max-width:1120px;margin:0 auto}
+$R .m3-who{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:start;padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh)}
+$R .m3-who-ic{width:56px;height:56px;padding:6px;border-radius:16px;background:var(--pl)}
+$R .m3-who-1 .m3-who-ic{background:#FFE9EE}
+$R .m3-who-2 .m3-who-ic{background:#E6F4FF}
+$R .m3-who-3 .m3-who-ic{background:#FFF4CC}
+$R .m3-who-4 .m3-who-ic{background:#E2F8EF}
+$R .m3-who .m3-h3{font-size:clamp(17px,.6vw + 15px,20px)}
+$R .m3-who p{margin-top:8px;font-size:15px;line-height:1.55;color:#3A3A5A}
+$R .m3-who-m b{color:var(--p)}
+$R .m3-who-i b{color:#B53A55}
+$R .m3-who .m3-but-k{margin-bottom:6px}
+$R .m3-who-us{background:linear-gradient(180deg,#2E1D5C 0%,#1A1033 100%);border:1.5px solid #E7B84A}
+$R .m3-who-us .m3-who-ic{background:rgba(255,214,109,.16)}
+$R .m3-who-us .m3-h3{color:#FFD66D}
+$R .m3-who-us p{color:#F3EEFF}
+$R .m3-who-us p b{color:#FFD66D}
+
 /* why */
 $R .m3-why{background:linear-gradient(180deg,#FFF9EF,#F4EFFF)}
 $R .m3-cmp{display:grid;gap:14px;align-items:stretch;max-width:1020px;margin:0 auto}
@@ -312,6 +335,7 @@ $R .m3-fcs{max-width:780px;margin:18px auto 0;gap:12px}
 $R .m3-fc{flex-direction:row;gap:10px;padding:10px 14px 10px 10px;font-size:14px;text-align:left}
 $R .m3-fc svg{flex:0 0 40px;width:40px;height:40px}
 $R .m3-grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+$R .m3-whos{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 $R .m3-cmp{grid-template-columns:1fr auto 1fr;gap:18px}
 $R .m3-mech{grid-template-columns:repeat(2,minmax(0,1fr))}
 $R .m3-plans{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
@@ -366,7 +390,7 @@ $R .m3-fc2{right:0;top:5%;animation-delay:-2s}
 $R .m3-fc3{left:50%;top:84%;margin-left:-110px;width:220px;animation-delay:-4s}
 }
 
-/* ---- sections below pricing (brief 2B): objection, dream result, developer note + facts, proof, closing CTA, FAQ ---- */
+/* ---- sections below pricing (brief 2B): objection, dream result, developer note, proof, closing CTA, FAQ ---- */
 $R .m3-eyebrow{display:inline-block;margin-bottom:12px;padding:5px 14px;border-radius:999px;background:var(--pl);color:var(--p);font-family:var(--fh);font-weight:800;font-size:12.5px;letter-spacing:.1em}
 
 /* pricing: 3 plans */
@@ -442,7 +466,6 @@ $R .m3-quote-t+.m3-quote-t{margin-top:12px}
 $R .m3-quote-t b{color:var(--pd)}
 $R .m3-sign{margin-top:16px;font-family:var(--fg);font-weight:700;font-size:24px;color:var(--p)}
 $R .m3-role{font-size:13.5px;color:var(--muted);font-weight:700}
-$R .m3-facts-h{margin:40px 0 14px;text-align:center;font-family:var(--fh);font-weight:800;font-size:18px;color:var(--pd)}
 $R .m3-swipe{display:flex;align-items:center;justify-content:center;gap:8px;margin:-4px 0 12px;font-size:13px;font-weight:800;color:var(--p)}
 $R .m3-swipe::after{content:"";width:9px;height:9px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg);animation:m3-nudge 1.4s ease-in-out infinite}
 @keyframes m3-nudge{50%{transform:translateX(6px) rotate(-45deg)}}
@@ -514,6 +537,7 @@ $R .m3-strength{position:absolute;left:286px;bottom:96px;margin:0;width:220px}
 $R .m3-gal{grid-template-columns:260px 1fr;align-items:start}
 }
 @media (min-width:1080px){
+$R .m3-whos{grid-template-columns:repeat(3,minmax(0,1fr))}
 $R .m3-plans3{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 $R .m3-plans3 .m3-plan-usahawan{grid-column:auto;max-width:none}
 $R .m3-plans3 .m3-plan{padding-left:22px;padding-right:22px}

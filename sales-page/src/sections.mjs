@@ -151,6 +151,18 @@ function problems() {
 </section>`;
 }
 
+function fakta(frames) {
+  return `<section class="m3-sec m3-fakta" data-sec="fakta" aria-labelledby="m3-h-fakta">
+<div class="m3-wrap">
+<div class="m3-head m3-rv"><span class="m3-eyebrow">FAKTA</span><h2 id="m3-h-fakta" class="m3-h2">Ini Bukan Sangkaan. KPM Sendiri Ada Program Khas Untuk Murid Tahun 1 Yang Belum Kuasai 3M.</h2>
+<p class="m3-sub">Fakta yang boleh anda semak sendiri dalam berita di bawah.</p></div>
+<p class="m3-swipe" aria-hidden="true">Leret ke kanan untuk berita seterusnya</p>
+<div class="m3-facts">${frames.map((f) => `<div class="m3-kr">${f}</div>`).join('')}</div>
+<p class="m3-fine m3-center">Misi Pemulihan 3M ialah produk pembelajaran bebas. Ia bukan produk rasmi atau diperakui oleh KPM.</p>
+</div>
+</section>`;
+}
+
 function why() {
   const A = ['Soalan sama untuk semua anak.', 'Fokus pada betul atau salah.', 'Sukar nampak kemahiran yang perlu diulang.', 'Kurang variasi cara menjawab.'];
   const B = ['Latihan disesuaikan mengikut prestasi.', 'Anak belajar dengan 5 mekanik game.', 'Kemahiran lemah boleh dikenal pasti.', 'Progress ditunjukkan kepada ibu ayah.', 'Ada bintang dan sticker sebagai galakan.'];
@@ -230,6 +242,28 @@ function demo() {
 </section>`;
 }
 
+function siapa() {
+  const W = [
+    ['huruf', 'Ibu ayah anak prasekolah 5–6 tahun', 'Anak kenal huruf, bunyi dan nombor melalui misi pendek sebelum masuk Tahun 1.', 'Anak masuk Tahun 1 dengan yakin, dah boleh baca dan kira perkara asas.'],
+    ['stairs', 'Ibu ayah anak Tahun 1–3 yang belum lancar 3M', '3 tahap kesukaran, dari Asas ke Hebat, jadi anak berlatih ikut tahap sendiri.', 'Anak boleh baca, eja dan kira sendiri tanpa tunggu dibantu.'],
+    ['sticker', 'Ibu ayah yang anaknya cepat bosan dengan buku latihan', 'Setiap misi cuma 8 soalan, dengan bintang dan sticker sebagai ganjaran.', 'Anak sendiri yang minta nak main misi seterusnya.'],
+    ['report', 'Ibu ayah bekerja yang tak banyak masa', 'Game beri arahan dan petunjuk sendiri. Laporan kemajuan dalam pakej PRO tunjuk apa anak dah kuasai.', 'Tahu anak lemah di bahagian mana, tanpa perlu semak setiap latihan.'],
+    ['taman', 'Cikgu, guru tadika dan guru pemulihan', 'Susunan kemahiran berpandukan DSKP KSSR dan MOBIM Tahun 1, rujukan yang sama di sekolah.', 'Murid ulang latihan 3M di rumah dengan seronok, bukan terpaksa.'],
+    ['kedai', 'Sesiapa yang nak bina dan jual game edu sendiri', `Modul bina game dan sales page ini, kedai e-dagang 1 tahun, dan ${KOMISYEN * 100}% hasil jualan BASIC & PRO.`, 'Ada produk digital sendiri yang dijual dari kedai sendiri.', true],
+  ];
+  return `<section class="m3-sec m3-who-sec" data-sec="siapa" aria-labelledby="m3-h-who">
+<div class="m3-wrap">
+<div class="m3-head m3-rv"><h2 id="m3-h-who" class="m3-h2">Misi Pemulihan 3M Sesuai Untuk Siapa?</h2>
+<p class="m3-sub">Game ini dibina untuk 6 golongan ini. Kalau anda salah seorang, anak anda dah sedia untuk mula misi pertama.</p></div>
+<div class="m3-whos">${W.map(
+    ([ic, t, m, d, us], i) => `<article class="m3-who m3-who-${i + 1}${us ? ' m3-who-us' : ''} m3-rv"><div class="m3-who-ic">${icon(IC[ic]())}</div><div>${us ? '<span class="m3-but-k">PAKEJ USAHAWAN</span>' : ''}<h3 class="m3-h3">${e(t)}</h3><p class="m3-who-m"><b>Manfaat:</b> ${e(m)}</p><p class="m3-who-i"><b>Impian:</b> ${e(d)}</p></div></article>`,
+  ).join('')}</div>
+<p class="m3-bridge m3-rv">Kalau anda nampak diri anda dalam salah satu kad ini, Misi Pemulihan 3M memang dibina untuk anda.</p>
+<p class="m3-fine m3-center">Misi Pemulihan 3M ialah alat latihan di rumah, bukan pengganti guru atau alat diagnosis.</p>
+</div>
+</section>`;
+}
+
 function features() {
   return `<section class="m3-sec m3-feats" data-sec="dapat" aria-labelledby="m3-h-feat">
 <div class="m3-wrap">
@@ -284,20 +318,22 @@ function footer() {
 </div></footer>`;
 }
 
-export const body = ({ fakta = [] } = {}) =>
+export const body = ({ fakta: frames = [] } = {}) =>
   `<div id="misi3m-sales-root" class="m3">
 ${sprite()}
 ${topBar()}
 <div class="m3-main">
 ${hero()}
 ${problems()}
+${fakta(frames)}
 ${why()}
 ${demo()}
+${siapa()}
 ${features()}
 ${pricing()}
 ${objection()}
 ${impian()}
-${pembangun(fakta)}
+${pembangun()}
 ${bukti()}
 ${penutup(PLANS)}
 ${faq()}
