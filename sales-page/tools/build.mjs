@@ -11,7 +11,7 @@ import { DREAM } from '../src/bawah.mjs';
 
 const dir = fileURLToPath(new URL('..', import.meta.url));
 const R = '#misi3m-sales-root';
-const FONTS = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400&family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&family=Poppins:wght@700&family=Work+Sans:wght@400&display=swap';
+const FONTS = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400&family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@700&family=Work+Sans:wght@400&display=swap';
 
 // News facts: assets/fakta/*.json → tools/keratan.mjs (layout ori, HTML) → frames + scoped CSS + fit script.
 const FAKTA = readdirSync(dir + 'assets/fakta').filter((f) => f.endsWith('.json')).sort().reverse().map((f) => dir + 'assets/fakta/' + f);

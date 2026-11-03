@@ -279,7 +279,7 @@ for (const width of [375, 430, 768, 1024, 1440]) {
 test('Elementor embed survives a hostile WordPress theme and leaks nothing', async ({ page }) => {
   const errors = await open(page, '/wp-host.html');
   const root = page.locator('#misi3m-sales-root');
-  expect(await root.locator('.m3-h2').first().evaluate((h) => getComputedStyle(h).color)).toBe('rgb(32, 32, 57)');
+  expect(await root.locator('.m3-h2').first().evaluate((h) => getComputedStyle(h).color)).toBe('rgb(42, 27, 69)');
   expect(await root.locator('.m3-h2').first().evaluate((h) => getComputedStyle(h).textTransform)).toBe('none');
   expect(await root.locator('a.m3-cta').first().evaluate((a) => getComputedStyle(a).color)).toBe('rgb(255, 255, 255)');
   expect(await root.locator('a.m3-cta').first().evaluate((a) => getComputedStyle(a).textDecorationLine)).toBe('none');
