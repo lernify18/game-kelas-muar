@@ -41,3 +41,7 @@ npx playwright test
 - ffmpeg image2 mula bernombor 1; stage baca dari 0000 → `-start_number 0`.
 - Kumpulan kapsyen mesti tamat 0.06 s sebelum kumpulan seterusnya muncul, atau 1 frame jadi double caption (spec menangkapnya).
 - `dist/misi-pemulihan-3m.html` dalam worktree game rosak semasa dirakam (`require is not defined`); rakam dari `index.html` + `src/`.
+- Frame stage ialah JPEG (full range). `-pix_fmt yuv420p` sahaja keluar sebagai `yuvj420p` / `pc` / bt470bg; render kini
+  tukar ke `yuv420p` limited BT.709 (`scale=in_range=full:out_range=limited`). Smoke MP4 menolak selain itu.
+- Render terus ke `out/` folder utama (`--out "<akar projek>/out/<tarikh>_preview-iklan-3m"`, uji dengan `VIDEO_OUT=<folder>`):
+  `out/` dalam worktree hilang bila worktree dibuang selepas merge, dan pautan ke fail itu mati.

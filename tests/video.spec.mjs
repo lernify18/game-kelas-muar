@@ -117,9 +117,10 @@ for (const v of VERSIONS) {
 }
 
 // ---------------- smoke: MP4 yang dirender ----------------
+// VIDEO_OUT = folder render tertentu (cth. out/ dalam folder utama, yang kekal selepas worktree dibuang).
 const outDirs = existsSync(join(WT, "out")) ? readdirSync(join(WT, "out")).filter((d) => d.includes("preview-iklan-3m")).sort() : [];
-const latest = outDirs.length ? join(WT, "out", outDirs.at(-1)) : null;
-const probe = (f) => JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration:stream=codec_type,width,height", "-of", "json", f], { encoding: "utf8" }));
+const latest = process.env.VIDEO_OUT || (outDirs.length ? join(WT, "out", outDirs.at(-1)) : null);
+const probe = (f) => JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration:stream=codec_type,width,height,pix_fmt,color_range,color_space,color_primaries,color_transfer", "-of", "json", f], { encoding: "utf8" }));
 const lufs = (input, pre = "") => {
   const out = execFileSync("sh", ["-c", `ffmpeg -hide_banner -nostats ${input} -af '${pre ? pre + "," : ""}ebur128' -f null - 2>&1 | grep -E '^ +I:' | tail -1`], { encoding: "utf8" });
   return +out.match(/(-?[\d.]+) LUFS/)[1];
@@ -132,6 +133,9 @@ for (const v of VERSIONS) {
     const p = probe(f);
     const vs = p.streams.find((s) => s.codec_type === "video");
     expect([vs.width, vs.height]).toEqual([1080, 1920]);
+    // Format standard Meta/iPhone/WhatsApp: yuv420p limited range BT.709, bukan yuvj420p full range dari JPEG stage.
+    expect({ pix: vs.pix_fmt, range: vs.color_range, space: vs.color_space, prim: vs.color_primaries, trc: vs.color_transfer })
+      .toEqual({ pix: "yuv420p", range: "tv", space: "bt709", prim: "bt709", trc: "bt709" });
     expect(p.streams.some((s) => s.codec_type === "audio")).toBe(true);
     expect(+p.format.duration).toBeGreaterThanOrEqual(15);
     expect(+p.format.duration).toBeLessThanOrEqual(25.1);

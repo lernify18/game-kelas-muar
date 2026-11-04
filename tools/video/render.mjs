@@ -67,8 +67,13 @@ async function main() {
 }
 
 async function renderVideo(page, silent, dur) {
+  // Frame stage ialah JPEG (full range). `-pix_fmt yuv420p` sahaja mengekalkan julat penuh dan keluar sebagai yuvj420p;
+  // tukar terang-terangan ke limited range BT.709, format yang Meta, iPhone dan WhatsApp jangka. Tag warna mesti dalam
+  // `setparams`: ffmpeg 9 mengutamakan sifat frame dan mengabaikan -color_primaries / -color_trc output.
   const ff = spawn("ffmpeg", ["-v", "error", "-y", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-r", String(FPS), silent], { stdio: ["pipe", "inherit", "inherit"] });
+    "-vf", "scale=in_range=full:out_range=limited:out_color_matrix=bt709,format=yuv420p,setparams=range=tv:colorspace=bt709:color_primaries=bt709:color_trc=bt709",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+    "-r", String(FPS), silent], { stdio: ["pipe", "inherit", "inherit"] });
   const n = Math.round(dur * FPS);
   const t0 = Date.now();
   for (let f = 0; f < n; f++) {
