@@ -49,3 +49,26 @@ test('real page: class photos and video load, news facts render, closing CTA ret
   await expect(page.locator('#m3-pakej')).toBeInViewport();
   expect(errors).toEqual([]);
 });
+
+// Safari (every iPhone browser) will not play a video whose server ignores Range. Cloudflare Static Assets
+// answers 200 with the whole file, so the Worker in worker/ must turn these into 206 Partial Content.
+test('real page: class video is served with byte ranges (206) so iPhone Safari can play it', async ({ page, request }) => {
+  await page.goto(URL, { waitUntil: 'domcontentloaded' });
+  const src = await page.locator('[data-sec="bukti"] video').evaluate((v: HTMLVideoElement) => v.currentSrc || v.src);
+  const full = await request.get(src);
+  expect(full.status()).toBe(200);
+  expect(full.headers()['accept-ranges']).toBe('bytes');
+  const whole = await full.body();
+
+  const head = await request.get(src, { headers: { Range: 'bytes=0-99' } });
+  expect(head.status()).toBe(206);
+  expect(head.headers()['content-range']).toBe(`bytes 0-99/${whole.length}`);
+  expect(Buffer.compare(await head.body(), whole.subarray(0, 100))).toBe(0);
+
+  const tail = await request.get(src, { headers: { Range: `bytes=${whole.length - 50}-` } });
+  expect(tail.status()).toBe(206);
+  expect(Buffer.compare(await tail.body(), whole.subarray(whole.length - 50))).toBe(0);
+
+  const past = await request.get(src, { headers: { Range: `bytes=${whole.length + 10}-` } });
+  expect(past.status()).toBe(416);
+});

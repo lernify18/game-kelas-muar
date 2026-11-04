@@ -50,7 +50,12 @@ E2E bersifat hermetik (server sendiri pada port rawak, Google Fonts dijawab koso
 
 ## Terbit di Cloudflare
 
-Hidup: **https://misi3m-sales.lernify18.workers.dev** (Worker `misi3m-sales`, Static Assets sahaja, akaun `lernify18`).
+Hidup: **https://misi3m-sales.lernify18.workers.dev** (Worker `misi3m-sales`, akaun `lernify18`).
+
+Halaman dan gambar dihidang terus oleh Static Assets. Hanya `/assets/img/*.mp4` melalui skrip kecil `worker/index.js`
+(`assets.run_worker_first`): Static Assets mengabaikan `Range` dan membalas 200 dengan fail penuh, sedangkan Safari di
+iPhone enggan memainkan video tanpa 206 Partial Content. `worker/range.js` diport dari helper Sellhiz
+(`server/lib/rangeResponse.ts`). Ujian unit: `pnpm test`.
 
 ```bash
 pnpm run deploy
