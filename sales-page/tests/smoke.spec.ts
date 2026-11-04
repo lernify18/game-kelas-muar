@@ -1,5 +1,6 @@
 // Smoke against the real local site served by Herd (http://misi3m.test). Override with SMOKE_URL.
 import { test, expect } from '@playwright/test';
+import { mp4VideoColour, type Colour } from './mp4-warna';
 
 const URL = process.env.SMOKE_URL || 'http://misi3m.test/misi-pemulihan-3m-sales-page.html';
 const SECTIONS = ['top-bar', 'hero', 'masalah', 'fakta', 'beza', 'demo', 'siapa', 'dapat', 'pakej', 'objection', 'impian', 'pembangun', 'bukti', 'cta', 'faq', 'footer'];
@@ -71,4 +72,15 @@ test('real page: class video is served with byte ranges (206) so iPhone Safari c
 
   const past = await request.get(src, { headers: { Range: `bytes=${whole.length + 10}-` } });
   expect(past.status()).toBe(416);
+});
+
+// iPhone footage is yuvj420p: full range, BT.601 matrix, P3 primaries. The class video must stay standard yuv420p
+// limited range BT.709, both in the H.264 SPS and the MP4 colr box. Rebuild it with tools/video-kelas.sh.
+test('real page: class video is yuv420p limited range BT.709, 540×960', async ({ page, request }) => {
+  await page.goto(URL, { waitUntil: 'domcontentloaded' });
+  const src = await page.locator('[data-sec="bukti"] video').evaluate((v: HTMLVideoElement) => v.currentSrc || v.src);
+  const res = await request.get(src);
+  expect(res.status()).toBe(200);
+  const bt709: Colour = { colorRange: 'tv', colorSpace: 'bt709', colorPrimaries: 'bt709', colorTransfer: 'bt709' };
+  expect(mp4VideoColour(await res.body())).toEqual({ codec: 'avc1', width: 540, height: 960, pixFmt: 'yuv420p', sps: bt709, colr: bt709 });
 });

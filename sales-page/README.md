@@ -12,6 +12,7 @@ SVG, CSS dan JavaScript ringan, tanpa gambar luar dan tanpa library animasi.
 | `assets/fakta/` | Satu JSON + foto setiap berita untuk «Fakta yang boleh anda semak sendiri» |
 | `tools/keratan.mjs` | Salinan penjana skill `/ubai-keratan-akhbar`; build menjalankannya (layout `ori`, HTML) |
 | `tools/build.mjs` | Jana kedua-dua fail HTML; tolak build jika id berulang, `url(#…)` yatim, emoji, frasa terlarang, value stack tak menjumlah, nilai 6 dunia ≠ item "6 Kategori" atau anchor ≠ 2 |
+| `tools/video-kelas.sh` | Bina semula `kelas-31okt.mp4` dari `RAW/kelas-terkini/` sebagai yuv420p julat terhad BT.709 (bukan yuvj420p iPhone); smoke menolak format lain |
 
 Kedua-dua fail HTML adalah **output**. Ubah dalam `src/`, kemudian `node tools/build.mjs`.
 
