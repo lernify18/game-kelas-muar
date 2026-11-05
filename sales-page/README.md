@@ -72,9 +72,18 @@ SMOKE_URL=https://misi3m-sales.lernify18.workers.dev/ npx playwright test tests/
 
 Tiga butang pakej masih `href="#"`: halaman hidup belum boleh menerima bayaran sehingga pautan sebenar dipasang.
 
-Semua 6 butang (3 pakej + 3 kad CTA penutup) menghantar `window.parent.postMessage({ type: 'scroll-to-payment' }, '*')`
-bila ditekan, untuk kedai yang membenam page ini dalam iframe dengan checkout di bawahnya. Dalam iframe, butang tidak
-melayari sendiri. Bila dibuka terus (tiada induk), kad CTA penutup skrol ke pricing dan butang pakej kekal di tempat.
+Semua 6 butang (3 pakej + 3 kad CTA penutup) menghantar mesej kepada kedai yang membenam page ini dalam iframe:
+
+- **Checkout gaya Woo (pilihan Ubai, 2026-11-05).** Bila Embed URL Page Sellhiz menamakan produk setiap pakej, butang
+  pakej itu menghantar `{ type: 'embed:add-to-cart', productId }` dan Sellhiz membuka checkout dengan pakej itu sahaja
+  dalam troli. Setiap kedai (termasuk reseller) letak ID produknya sendiri:
+  `https://misi3m-sales.lernify18.workers.dev/?basic=<id>&pro=<id>&usahawan=<id>`. ID = UUID produk atau nombor
+  add-to-cart; nilai lain diabaikan (`src/pakej-id.js`). Page Sellhiz: «Checkout style» = Sticky button (WooCommerce),
+  «CTA bar» = No bar.
+- Tanpa ID untuk pakej itu, butang menghantar `{ type: 'scroll-to-payment' }` dan kedai membuka checkout biasa.
+
+Dalam iframe, butang tidak melayari sendiri. Bila dibuka terus (tiada induk), kad CTA penutup skrol ke pricing dan
+butang pakej kekal di tempat.
 
 ## Pasang di WordPress / Elementor
 

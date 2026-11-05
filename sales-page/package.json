@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
-    "check": "node tools/build.mjs --check && node --check src/app.js",
-    "test": "node --test worker/*.test.mjs",
+    "check": "node tools/build.mjs --check && node --check src/pakej-id.js && node --check src/app.js",
+    "test": "node --test worker/*.test.mjs src/*.test.mjs",
     "test:smoke": "playwright test tests/smoke.spec.ts",
     "test:e2e": "playwright test tests/sales-page.spec.ts",
     "deploy": "node tools/build.mjs && wrangler deploy"

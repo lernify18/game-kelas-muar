@@ -27,7 +27,8 @@ const css = readFileSync(dir + 'src/styles.css', 'utf8')
   .replace(/\$R/g, R)
   .replace(/\n+/g, '\n')
   .trim() + '\n' + krCss.trim();
-const js = readFileSync(dir + 'src/app.js', 'utf8').trim() + '\n' + krJs.trim();
+// One wrapper keeps m3PakejIds out of the host page's globals (the Elementor embed must leak nothing).
+const js = '(function () {\n' + readFileSync(dir + 'src/pakej-id.js', 'utf8').trim() + '\n' + readFileSync(dir + 'src/app.js', 'utf8').trim() + '\n})();\n' + krJs.trim();
 const html = body({ fakta }).replace(/>\s+</g, '><');
 
 const errors = [];
@@ -58,7 +59,8 @@ for (const [t, v] of DREAM) {
   if (!item || item[1] !== v) errors.push(`dream "${t}" RM${v} ≠ PRO pricing item RM${item?.[1]}`);
 }
 // Buttons only where people buy: one per plan (href="#" until payment links exist) and the closing CTA, which
-// scrolls back to the pricing table. All six also post scroll-to-payment to the host (src/app.js). No other links.
+// scrolls back to the pricing table. All six also post to the host: embed:add-to-cart when the embed URL names the
+// package's product, else scroll-to-payment (src/app.js, src/pakej-id.js). No other links.
 const ctas = [...html.matchAll(/<a\s[^>]*>/g)].map((m) => m[0]);
 const planCtas = ctas.filter((a) => /class="m3-cta"/.test(a));
 const endCtas = ctas.filter((a) => /class="m3-mini-b/.test(a));

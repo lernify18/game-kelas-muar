@@ -12,11 +12,14 @@
   $$('[data-m3-year]').forEach(function (n) { n.textContent = String(new Date().getFullYear()); });
   if (reduce) $$('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
 
-  // Inside the shop's iframe the host scrolls to its own checkout. Opened directly there is no host: the closing
+  // Inside the shop's iframe the host opens its checkout: with that package in the cart when the embed URL names its
+  // product (src/pakej-id.js), otherwise its generic checkout. Opened directly there is no host: the closing
   // cards keep their #m3-pakej jump, and the plan buttons stay put instead of following href="#" to the top.
   var framed = window.parent !== window;
+  var pakejIds = m3PakejIds(location.search);
   var handleClick = function (ev) {
-    window.parent.postMessage({ type: 'scroll-to-payment' }, '*');
+    var id = pakejIds[ev.currentTarget.getAttribute('data-pkg')];
+    window.parent.postMessage(id ? { type: 'embed:add-to-cart', productId: id } : { type: 'scroll-to-payment' }, '*');
     if (framed || ev.currentTarget.getAttribute('href') === '#') ev.preventDefault();
   };
   $$('a.m3-cta, a.m3-mini-b').forEach(function (a) { a.addEventListener('click', handleClick); });
